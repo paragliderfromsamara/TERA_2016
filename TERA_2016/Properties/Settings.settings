@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TERA_2016.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="rootConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UserId=root;Server=localhost;Password=;CharacterSet=cp1251;</Value>
+    </Setting>
+    <Setting Name="isTestApp" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
