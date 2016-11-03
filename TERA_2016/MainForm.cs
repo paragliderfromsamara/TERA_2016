@@ -15,7 +15,8 @@ namespace TERA_2016
         public bool isTestApp = Properties.Settings.Default.isTestApp;
         public string user_type = "undefined";
         public string user_id = "undefined";
-        private dbUsersForm dbUsersForm = null;
+        public dbUsersForm dbUsersForm = null;
+        public measureForms.manualMeasureForm manualMeasureForm = null;
         public mainForm()
         {
             InitializeComponent();
@@ -54,5 +55,18 @@ namespace TERA_2016
             dbUsersForm.MdiParent = this;
             dbUsersForm.Show();
         }
+
+        private void handMeasureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (manualMeasureForm == null)
+            {
+                manualMeasureForm = new measureForms.manualMeasureForm(this);
+                manualMeasureForm.MdiParent = this;
+                manualMeasureForm.Show();
+            }
+
+        }
+
+
     }
 }

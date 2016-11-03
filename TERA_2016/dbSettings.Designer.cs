@@ -91,5 +91,32 @@ namespace TERA_2016 {
                 return ((string)(this["updateUserWithoutPassword"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM isolation_materials")]
+        public string selectMaterials {
+            get {
+                return ((string)(this["selectMaterials"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM camera_types")]
+        public string selectCameraTypes {
+            get {
+                return ((string)(this["selectCameraTypes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM bringing_types")]
+        public string selectBringingTypes {
+            get {
+                return ((string)(this["selectBringingTypes"]));
+            }
+        }
     }
 }

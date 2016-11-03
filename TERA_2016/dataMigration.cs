@@ -45,7 +45,27 @@ namespace TERA_2016
             createCameraTypesTable(); //создаёт таблицу с измерительными камерами
             createIsolationMaterialsTable(); //Добавляет таблицу с изоляционными материалами
             createIsolationMaterialTCoeffsTable(); //Добавляет таблицу с температурными коэффициентами для материалов изоляции
+            createBringingTypesTable(); //Добавляет таблицу типов приведения
             // createBarabanTypesTable(); //Добавляет таблицу с типами барабанов
+        }
+
+        private void createBringingTypesTable()
+        {
+            string tableName = "bringing_types";
+            string[][] sysadmParams =
+            {
+                new string[] { "1","'Без приведения'"},
+                new string[] { "2","'Приведение к длине'"},
+                new string[] { "3","'Объёмное сопротивление'"},
+                new string[] { "4","'Поверхностное сопротивление'"},
+            };
+            string[] colsArray = {
+                                    "id INT UNSIGNED AUTO_INCREMENT NOT NULL",
+                                    "name TINYTEXT",
+                                    "PRIMARY KEY (id)"
+                                 };
+            checkAndAddTable(tableName, colsArray);
+            addBasicDataToTable(tableName, sysadmParams);
         }
 
         private static void createCameraTypesTable()
@@ -222,7 +242,7 @@ namespace TERA_2016
                 new string[] {"3", "5", "0.58"},
                 new string[] {"3", "6", "0.6"},
                 new string[] {"3", "7", "0.64"},
-                new  string[] {"3", "8", "0.67"},
+                new string[] {"3", "8", "0.67"},
                 new string[] {"3", "9", "0.69"},
                 new string[] {"3", "10", "0.72"},
                 new string[] {"3", "11", "0.74"},

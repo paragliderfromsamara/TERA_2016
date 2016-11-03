@@ -35,8 +35,8 @@
             this.dbMeasureProgrammsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dbTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ручныеИспытанияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.автоматическиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.handMeasureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deviceSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calibrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,23 +99,24 @@
             // testsToolStripMenuItem
             // 
             this.testsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ручныеИспытанияToolStripMenuItem,
-            this.автоматическиеToolStripMenuItem});
+            this.handMeasureToolStripMenuItem,
+            this.autoTestsToolStripMenuItem});
             this.testsToolStripMenuItem.Name = "testsToolStripMenuItem";
             this.testsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.testsToolStripMenuItem.Text = "Испытания";
             // 
-            // ручныеИспытанияToolStripMenuItem
+            // handMeasureToolStripMenuItem
             // 
-            this.ручныеИспытанияToolStripMenuItem.Name = "ручныеИспытанияToolStripMenuItem";
-            this.ручныеИспытанияToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.ручныеИспытанияToolStripMenuItem.Text = "Ручные испытания";
+            this.handMeasureToolStripMenuItem.Name = "handMeasureToolStripMenuItem";
+            this.handMeasureToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.handMeasureToolStripMenuItem.Text = "Ручные испытания";
+            this.handMeasureToolStripMenuItem.Click += new System.EventHandler(this.handMeasureToolStripMenuItem_Click);
             // 
-            // автоматическиеToolStripMenuItem
+            // autoTestsToolStripMenuItem
             // 
-            this.автоматическиеToolStripMenuItem.Name = "автоматическиеToolStripMenuItem";
-            this.автоматическиеToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.автоматическиеToolStripMenuItem.Text = "Автоматические испытания";
+            this.autoTestsToolStripMenuItem.Name = "autoTestsToolStripMenuItem";
+            this.autoTestsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.autoTestsToolStripMenuItem.Text = "Автоматические испытания";
             // 
             // deviceSettingsToolStripMenuItem
             // 
@@ -198,8 +199,8 @@
         private System.Windows.Forms.ToolStripMenuItem dbMeasureProgrammsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dbTestsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ручныеИспытанияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem автоматическиеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem handMeasureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoTestsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deviceSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calibrationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;

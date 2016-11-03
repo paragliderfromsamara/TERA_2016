@@ -26,5 +26,14 @@
     <Setting Name="updateUserWithoutPassword" Type="System.String" Scope="Application">
       <Value Profile="(Default)">UPDATE users SET users.name = "{1}", users.last_name = "{2}", users.third_name = "{3}", users.employee_number = {4}, users.role_id = {5} WHERE users.id IN({0})</Value>
     </Setting>
+    <Setting Name="selectMaterials" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT * FROM isolation_materials</Value>
+    </Setting>
+    <Setting Name="selectCameraTypes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT * FROM camera_types</Value>
+    </Setting>
+    <Setting Name="selectBringingTypes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT * FROM bringing_types</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
