@@ -62,6 +62,9 @@
             this.materialLengthLbl = new System.Windows.Forms.Label();
             this.materialLength = new System.Windows.Forms.NumericUpDown();
             this.diametersLbl = new System.Windows.Forms.Label();
+            this.measureResultLbl = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.serviceParameters = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cycleTimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.averagingTimes)).BeginInit();
@@ -72,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.isolation_materials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bringing_types)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialLength)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // voltageComboBox
@@ -99,7 +103,7 @@
             // 
             // startMeasureBut
             // 
-            this.startMeasureBut.Location = new System.Drawing.Point(12, 496);
+            this.startMeasureBut.Location = new System.Drawing.Point(12, 370);
             this.startMeasureBut.Name = "startMeasureBut";
             this.startMeasureBut.Size = new System.Drawing.Size(145, 31);
             this.startMeasureBut.TabIndex = 2;
@@ -384,11 +388,41 @@
             this.diametersLbl.TabIndex = 12;
             this.diametersLbl.Text = "label6";
             // 
+            // measureResultLbl
+            // 
+            this.measureResultLbl.AutoSize = true;
+            this.measureResultLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.measureResultLbl.Location = new System.Drawing.Point(145, 49);
+            this.measureResultLbl.Name = "measureResultLbl";
+            this.measureResultLbl.Size = new System.Drawing.Size(271, 73);
+            this.measureResultLbl.TabIndex = 13;
+            this.measureResultLbl.Text = "0.0 ГОм";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.measureResultLbl);
+            this.panel1.Location = new System.Drawing.Point(216, 123);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(555, 179);
+            this.panel1.TabIndex = 14;
+            // 
+            // serviceParameters
+            // 
+            this.serviceParameters.AutoSize = true;
+            this.serviceParameters.Location = new System.Drawing.Point(213, 107);
+            this.serviceParameters.Name = "serviceParameters";
+            this.serviceParameters.Size = new System.Drawing.Size(177, 13);
+            this.serviceParameters.TabIndex = 15;
+            this.serviceParameters.Text = "Значение параметров испытания";
+            // 
             // manualMeasureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 539);
+            this.ClientSize = new System.Drawing.Size(784, 416);
+            this.Controls.Add(this.serviceParameters);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.diametersLbl);
             this.Controls.Add(this.materialLength);
             this.Controls.Add(this.materialLengthLbl);
@@ -415,6 +449,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.isolation_materials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bringing_types)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialLength)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,5 +492,8 @@
         private System.Windows.Forms.Label materialLengthLbl;
         private System.Windows.Forms.NumericUpDown materialLength;
         private System.Windows.Forms.Label diametersLbl;
+        private System.Windows.Forms.Label measureResultLbl;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label serviceParameters;
     }
 }

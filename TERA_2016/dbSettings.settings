@@ -35,5 +35,14 @@
     <Setting Name="selectBringingTypes" Type="System.String" Scope="Application">
       <Value Profile="(Default)">SELECT * FROM bringing_types</Value>
     </Setting>
+    <Setting Name="selectDeviceBySerial" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT * FROM devices WHERE serial_number = "{0}"</Value>
+    </Setting>
+    <Setting Name="insertDevice" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">INSERT INTO devices (serial_number) VALUES ("{0}")</Value>
+    </Setting>
+    <Setting Name="updateRangeAndVoltageCoeffs" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UPDATE devices SET devices.zero_range_coeff = {1}, devices.first_range_coeff = {2}, devices.second_range_coeff = {3}, devices.third_range_coeff = {4}, devices.third_range_additional_coeff = {5}, devices.one_hundred_volts_coeff = {6}, devices.five_hundred_volts_coeff = {7}, devices.thousand_volts_coeff = {8}, devices.coeffs_check_sum = {9} WHERE devices.serial_number IN("{0}")</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

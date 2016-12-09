@@ -92,5 +92,18 @@ namespace TERA_2016
                 return 0;
             }
         }
+
+        public static float convertToFloat(object text)
+        {
+            try
+            {
+                string txt = text.ToString();
+                return (float)Convert.ToSingle(txt);
+            }
+            catch (FormatException)
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -13,8 +13,9 @@ namespace TERA_2016.measureForms
 {
     public partial class manualMeasureForm : Form
     {
+        delegate void updateServiceFieldDelegate(string serviceInfo);
         private mainForm mForm = null;
-
+        private deviceControl.TeraMeasure teraMeas = null;
         private int externalCamDiam, internalCamDiam;
 
 
@@ -26,6 +27,9 @@ namespace TERA_2016.measureForms
             initFields();
             switchBringingParams();
             getCameraDiametersByCameraId();
+            serviceParameters.Text = "";
+            teraMeas = new deviceControl.TeraMeasure(this.mForm.currentDevice);
+            teraMeas.mForm = this;
         }
 
         /// <summary>
@@ -72,17 +76,29 @@ namespace TERA_2016.measureForms
 
         private void startMeasureBut_Click(object sender, EventArgs e)
         {
-            measureSettings.Default.voltage = Convert.ToInt16(voltageComboBox.Text);
-            measureSettings.Default.dischargeDelay = Convert.ToInt16(dischargeDelay.Value);
-            measureSettings.Default.polarizationDelay = Convert.ToInt16(polarizationDelay.Value);
-            measureSettings.Default.cycleTimes = Convert.ToInt16(cycleTimes.Value);
-            measureSettings.Default.isCycleMeasure = isCyclicMeasure.Checked;
-            measureSettings.Default.averagingTimes = Convert.ToInt16(averagingTimes.Value);
-            measureSettings.Default.bringingLength = Convert.ToInt16(materialLength.Value);
-            measureSettings.Default.internalCameraDiameter = internalCamDiam;
-            measureSettings.Default.externalCameraDiameter = externalCamDiam;
-            measureSettings.Default.materialTypeId = materialTypes.SelectedValue.ToString();
-            measureSettings.Default.bringingTypeId = bringingTypeCB.SelectedValue.ToString();
+            
+            if (!teraMeas.isStart)
+            {
+                if (!this.mForm.teraPort.IsOpen) this.mForm.teraPort.Open();
+                teraMeas.voltage = voltageComboBox.SelectedIndex + 1;
+                measureSettings.Default.voltage = Convert.ToInt16(voltageComboBox.Text);
+                measureSettings.Default.dischargeDelay = Convert.ToInt16(dischargeDelay.Value);
+                measureSettings.Default.polarizationDelay = Convert.ToInt16(polarizationDelay.Value);
+                measureSettings.Default.cycleTimes = Convert.ToInt16(cycleTimes.Value);
+                measureSettings.Default.isCycleMeasure = isCyclicMeasure.Checked;
+                measureSettings.Default.averagingTimes = Convert.ToInt16(averagingTimes.Value);
+                measureSettings.Default.bringingLength = Convert.ToInt16(materialLength.Value);
+                measureSettings.Default.internalCameraDiameter = internalCamDiam;
+                measureSettings.Default.externalCameraDiameter = externalCamDiam;
+                measureSettings.Default.materialTypeId = materialTypes.SelectedValue.ToString();
+                measureSettings.Default.bringingTypeId = bringingTypeCB.SelectedValue.ToString();
+                teraMeas.startTest();
+            }else
+            {
+                teraMeas.stopTest();
+                this.mForm.teraPort.Close();
+            }
+            
         }
 
         private void bringingTypeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -129,6 +145,19 @@ namespace TERA_2016.measureForms
                 }
             }
             diametersLbl.Text = String.Format("Внутренний диаметр охранного кольца: {0}мм; \nВнешний диаметр охранного кольца: {1}мм;", internalCamDiam, externalCamDiam);
+        }
+
+        public void updateServiceField(string serviceInfo) //Для обновления поля результата из другого потока в котором проходит испытание
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new updateServiceFieldDelegate(updateServiceField), new object[] { serviceInfo });
+                return;
+            }
+            else
+            {
+                this.serviceParameters.Text = serviceInfo;
+            }
         }
     }
 }

@@ -118,5 +118,32 @@ namespace TERA_2016 {
                 return ((string)(this["selectBringingTypes"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM devices WHERE serial_number = \"{0}\"")]
+        public string selectDeviceBySerial {
+            get {
+                return ((string)(this["selectDeviceBySerial"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("INSERT INTO devices (serial_number) VALUES (\"{0}\")")]
+        public string insertDevice {
+            get {
+                return ((string)(this["insertDevice"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"UPDATE devices SET devices.zero_range_coeff = {1}, devices.first_range_coeff = {2}, devices.second_range_coeff = {3}, devices.third_range_coeff = {4}, devices.third_range_additional_coeff = {5}, devices.one_hundred_volts_coeff = {6}, devices.five_hundred_volts_coeff = {7}, devices.thousand_volts_coeff = {8}, devices.coeffs_check_sum = {9} WHERE devices.serial_number IN(""{0}"")")]
+        public string updateRangeAndVoltageCoeffs {
+            get {
+                return ((string)(this["updateRangeAndVoltageCoeffs"]));
+            }
+        }
     }
 }

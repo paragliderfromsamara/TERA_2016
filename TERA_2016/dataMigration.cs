@@ -46,9 +46,31 @@ namespace TERA_2016
             createIsolationMaterialsTable(); //Добавляет таблицу с изоляционными материалами
             createIsolationMaterialTCoeffsTable(); //Добавляет таблицу с температурными коэффициентами для материалов изоляции
             createBringingTypesTable(); //Добавляет таблицу типов приведения
-            // createBarabanTypesTable(); //Добавляет таблицу с типами барабанов
+            createDevicesTable(); // createDevicesTable(); //Добавляет таблицу с приборами
         }
 
+        private void createDevicesTable()
+        {
+            string tableName = "devices";
+            string[] colsArray = {
+                                    //INSERT INTO devices (serial_number) VALUES {0}
+                                    //UPDATE devices SET devices.zero_range_coeff = {1}, devices.first_range_coeff = {2}, devices.second_range_coeff = {3}, devices.third_range_coeff = {4}, devices.third_range_additional_coeff = {5}, devices.one_hundred_volts_coeff = {6}, devices.five_hundred_volts_coeff = {7}, devices.thousand_volts_coeff = {8}, devices.coeffs_check_sum = {9} WHERE devices.serial_number IN("{0}")
+                                    //при добавлении столбцов необходимо исправить строки запроса 
+                                    "id INT UNSIGNED AUTO_INCREMENT NOT NULL", //0
+                                    "serial_number TINYTEXT",                  //1
+                                    "zero_range_coeff FLOAT Default 0.0",      //2
+                                    "first_range_coeff FLOAT Default 0.0",     //3
+                                    "second_range_coeff FLOAT Default 0.0",    //4
+                                    "third_range_coeff FLOAT Default 0.0",     //5
+                                    "third_range_additional_coeff FLOAT Default 0.0", //6
+                                    "one_hundred_volts_coeff FLOAT Default 0.0",      //7
+                                    "five_hundred_volts_coeff FLOAT Default 0.0",     //8
+                                    "thousand_volts_coeff FLOAT Default 0.0",         //9
+                                    "coeffs_check_sum INT UNSIGNED Default 0.0", //10 контрольная сумма коэффициентов, для проверки изменились они, или нет
+                                    "PRIMARY KEY (id)"
+                                 };
+            checkAndAddTable(tableName, colsArray);
+        }
         private void createBringingTypesTable()
         {
             string tableName = "bringing_types";
