@@ -49,7 +49,7 @@ namespace TERA_2016 {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int averagingTimes {
             get {
                 return ((int)(this["averagingTimes"]));
@@ -61,7 +61,7 @@ namespace TERA_2016 {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool isCycleMeasure {
             get {
                 return ((bool)(this["isCycleMeasure"]));
@@ -164,6 +164,66 @@ namespace TERA_2016 {
             }
             set {
                 this["materialTypeId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int lengthBringingIdx {
+            get {
+                return ((int)(this["lengthBringingIdx"]));
+            }
+            set {
+                this["lengthBringingIdx"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int normaValue {
+            get {
+                return ((int)(this["normaValue"]));
+            }
+            set {
+                this["normaValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int materialHeight {
+            get {
+                return ((int)(this["materialHeight"]));
+            }
+            set {
+                this["materialHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isDegreeView {
+            get {
+                return ((bool)(this["isDegreeView"]));
+            }
+            set {
+                this["isDegreeView"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int minTimeToNorm {
+            get {
+                return ((int)(this["minTimeToNorm"]));
+            }
+            set {
+                this["minTimeToNorm"] = value;
             }
         }
     }

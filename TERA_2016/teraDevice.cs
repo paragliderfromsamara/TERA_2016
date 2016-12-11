@@ -21,6 +21,12 @@ namespace TERA_2016
         public uint checkSumFromDB = 0; //Проверочная сумма из БД
         public float[] rangeCoeffs = new float[] { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f}; //коэффициенты коррекции по диапазону
         public float[] voltageCoeffs = new float[] { 0.0f, 0.0f, 0.0f };     //коэффициенты коррекции по напряжению
+        /// <summary>
+        /// Массив интегрирующих емкостей. Адрес в массиве == номеру диапазона
+        /// </summary>
+        public double[] capacitiesList = new double[] { 91.1, 11.1, 1.1, 0.1 }; //массив интегрирующих емкостей
+        public double zeroResistance = 0.0003; //нулевое сопротивление, зависит от номинала защитного резистора
+        public double refVoltage = 4.8; //опорное напряжение
         private DataRow dataRow = null;
         private mainForm mForm = null;
         /*комманды для управления прибором*/

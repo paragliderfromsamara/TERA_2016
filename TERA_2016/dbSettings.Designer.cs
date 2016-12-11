@@ -145,5 +145,15 @@ namespace TERA_2016 {
                 return ((string)(this["updateRangeAndVoltageCoeffs"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM isolation_material_tcoeffs WHERE isolation_material_id IN ({0}) ORD" +
+            "ER BY isolation_material_id ASC")]
+        public string selectIsolationMaterialCoeffs {
+            get {
+                return ((string)(this["selectIsolationMaterialCoeffs"]));
+            }
+        }
     }
 }

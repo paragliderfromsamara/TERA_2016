@@ -1,6 +1,6 @@
 ﻿namespace TERA_2016.measureForms
 {
-    partial class manualMeasureForm
+    partial class manualTeraMeasureForm
     {
         /// <summary>
         /// Required designer variable.
@@ -61,10 +61,26 @@
             this.bringingTypeCB = new System.Windows.Forms.ComboBox();
             this.materialLengthLbl = new System.Windows.Forms.Label();
             this.materialLength = new System.Windows.Forms.NumericUpDown();
-            this.diametersLbl = new System.Windows.Forms.Label();
             this.measureResultLbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.normaLbl = new System.Windows.Forms.Label();
+            this.statMeasNumbOfLbl = new System.Windows.Forms.Label();
+            this.cycleCounterLbl = new System.Windows.Forms.Label();
+            this.measTimeLbl = new System.Windows.Forms.Label();
+            this.midStatMeasValLbl = new System.Windows.Forms.Label();
             this.serviceParameters = new System.Windows.Forms.Label();
+            this.normaFieldLbl = new System.Windows.Forms.Label();
+            this.normaField = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.temperatureField = new System.Windows.Forms.NumericUpDown();
+            this.lengthQuantitMeasCb = new System.Windows.Forms.ComboBox();
+            this.bringingToLbl = new System.Windows.Forms.Label();
+            this.materialHeightLbl = new System.Windows.Forms.Label();
+            this.materialHeight = new System.Windows.Forms.NumericUpDown();
+            this.isDegreeViewCheckBox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.minTimeToNorm = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cycleTimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.averagingTimes)).BeginInit();
@@ -76,6 +92,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bringing_types)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialLength)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.normaField)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.temperatureField)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).BeginInit();
             this.SuspendLayout();
             // 
             // voltageComboBox
@@ -103,12 +123,13 @@
             // 
             // startMeasureBut
             // 
-            this.startMeasureBut.Location = new System.Drawing.Point(12, 370);
+            this.startMeasureBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startMeasureBut.Location = new System.Drawing.Point(216, 332);
             this.startMeasureBut.Name = "startMeasureBut";
-            this.startMeasureBut.Size = new System.Drawing.Size(145, 31);
+            this.startMeasureBut.Size = new System.Drawing.Size(556, 46);
             this.startMeasureBut.TabIndex = 2;
-            this.startMeasureBut.Text = "Запуск измерения";
-            this.startMeasureBut.UseVisualStyleBackColor = true;
+            this.startMeasureBut.Text = "ПУСК ИЗМЕРЕНИЯ";
+            this.startMeasureBut.UseVisualStyleBackColor = false;
             this.startMeasureBut.Click += new System.EventHandler(this.startMeasureBut_Click);
             // 
             // groupBox1
@@ -169,9 +190,19 @@
             // averagingTimes
             // 
             this.averagingTimes.Location = new System.Drawing.Point(335, 42);
+            this.averagingTimes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.averagingTimes.Name = "averagingTimes";
             this.averagingTimes.Size = new System.Drawing.Size(94, 20);
             this.averagingTimes.TabIndex = 6;
+            this.averagingTimes.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label3
             // 
@@ -198,6 +229,7 @@
             this.isCyclicMeasure.TabIndex = 8;
             this.isCyclicMeasure.Text = "Цикличное измерение";
             this.isCyclicMeasure.UseVisualStyleBackColor = true;
+            this.isCyclicMeasure.CheckedChanged += new System.EventHandler(this.isCyclicMeasure_CheckedChanged);
             // 
             // label2
             // 
@@ -284,7 +316,7 @@
             this.materialTypes.DisplayMember = "isolation_materials.name";
             this.materialTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.materialTypes.FormattingEnabled = true;
-            this.materialTypes.Location = new System.Drawing.Point(30, 139);
+            this.materialTypes.Location = new System.Drawing.Point(30, 190);
             this.materialTypes.Name = "materialTypes";
             this.materialTypes.Size = new System.Drawing.Size(148, 21);
             this.materialTypes.TabIndex = 4;
@@ -293,7 +325,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 123);
+            this.label5.Location = new System.Drawing.Point(27, 174);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 5;
@@ -302,7 +334,7 @@
             // cameraLbl
             // 
             this.cameraLbl.AutoSize = true;
-            this.cameraLbl.Location = new System.Drawing.Point(27, 225);
+            this.cameraLbl.Location = new System.Drawing.Point(27, 316);
             this.cameraLbl.Name = "cameraLbl";
             this.cameraLbl.Size = new System.Drawing.Size(151, 13);
             this.cameraLbl.TabIndex = 6;
@@ -314,7 +346,7 @@
             this.cameraTypesCB.DisplayMember = "camera_types.name";
             this.cameraTypesCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cameraTypesCB.FormattingEnabled = true;
-            this.cameraTypesCB.Location = new System.Drawing.Point(30, 241);
+            this.cameraTypesCB.Location = new System.Drawing.Point(30, 332);
             this.cameraTypesCB.Name = "cameraTypesCB";
             this.cameraTypesCB.Size = new System.Drawing.Size(148, 21);
             this.cameraTypesCB.TabIndex = 7;
@@ -324,7 +356,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(27, 172);
+            this.label7.Location = new System.Drawing.Point(27, 222);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 8;
@@ -336,7 +368,7 @@
             this.bringingTypeCB.DisplayMember = "bringing_types.name";
             this.bringingTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bringingTypeCB.FormattingEnabled = true;
-            this.bringingTypeCB.Location = new System.Drawing.Point(30, 188);
+            this.bringingTypeCB.Location = new System.Drawing.Point(30, 238);
             this.bringingTypeCB.Name = "bringingTypeCB";
             this.bringingTypeCB.Size = new System.Drawing.Size(148, 21);
             this.bringingTypeCB.TabIndex = 9;
@@ -346,11 +378,11 @@
             // materialLengthLbl
             // 
             this.materialLengthLbl.AutoSize = true;
-            this.materialLengthLbl.Location = new System.Drawing.Point(27, 225);
+            this.materialLengthLbl.Location = new System.Drawing.Point(27, 316);
             this.materialLengthLbl.Name = "materialLengthLbl";
-            this.materialLengthLbl.Size = new System.Drawing.Size(117, 13);
+            this.materialLengthLbl.Size = new System.Drawing.Size(93, 13);
             this.materialLengthLbl.TabIndex = 10;
-            this.materialLengthLbl.Text = "Длина приведения, м";
+            this.materialLengthLbl.Text = "Длина кабеля, м";
             // 
             // materialLength
             // 
@@ -359,7 +391,7 @@
             0,
             0,
             0});
-            this.materialLength.Location = new System.Drawing.Point(30, 242);
+            this.materialLength.Location = new System.Drawing.Point(30, 332);
             this.materialLength.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -379,33 +411,92 @@
             0,
             0});
             // 
-            // diametersLbl
-            // 
-            this.diametersLbl.AutoSize = true;
-            this.diametersLbl.Location = new System.Drawing.Point(27, 265);
-            this.diametersLbl.Name = "diametersLbl";
-            this.diametersLbl.Size = new System.Drawing.Size(35, 13);
-            this.diametersLbl.TabIndex = 12;
-            this.diametersLbl.Text = "label6";
-            // 
             // measureResultLbl
             // 
             this.measureResultLbl.AutoSize = true;
             this.measureResultLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.measureResultLbl.Location = new System.Drawing.Point(145, 49);
+            this.measureResultLbl.ForeColor = System.Drawing.Color.SteelBlue;
+            this.measureResultLbl.Location = new System.Drawing.Point(58, 48);
             this.measureResultLbl.Name = "measureResultLbl";
             this.measureResultLbl.Size = new System.Drawing.Size(271, 73);
             this.measureResultLbl.TabIndex = 13;
             this.measureResultLbl.Text = "0.0 ГОм";
+            this.measureResultLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.normaLbl);
+            this.panel1.Controls.Add(this.statMeasNumbOfLbl);
+            this.panel1.Controls.Add(this.cycleCounterLbl);
+            this.panel1.Controls.Add(this.measTimeLbl);
+            this.panel1.Controls.Add(this.midStatMeasValLbl);
             this.panel1.Controls.Add(this.measureResultLbl);
             this.panel1.Location = new System.Drawing.Point(216, 123);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(555, 179);
+            this.panel1.Size = new System.Drawing.Size(555, 175);
             this.panel1.TabIndex = 14;
+            // 
+            // normaLbl
+            // 
+            this.normaLbl.AutoSize = true;
+            this.normaLbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.normaLbl.ForeColor = System.Drawing.Color.SteelBlue;
+            this.normaLbl.Location = new System.Drawing.Point(68, 117);
+            this.normaLbl.Name = "normaLbl";
+            this.normaLbl.Size = new System.Drawing.Size(146, 16);
+            this.normaLbl.TabIndex = 18;
+            this.normaLbl.Text = "Норма:  100500 МОм";
+            this.normaLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // statMeasNumbOfLbl
+            // 
+            this.statMeasNumbOfLbl.AutoSize = true;
+            this.statMeasNumbOfLbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.statMeasNumbOfLbl.ForeColor = System.Drawing.Color.SteelBlue;
+            this.statMeasNumbOfLbl.Location = new System.Drawing.Point(421, 29);
+            this.statMeasNumbOfLbl.Name = "statMeasNumbOfLbl";
+            this.statMeasNumbOfLbl.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.statMeasNumbOfLbl.Size = new System.Drawing.Size(129, 16);
+            this.statMeasNumbOfLbl.TabIndex = 17;
+            this.statMeasNumbOfLbl.Text = "измерение 4 из 10";
+            this.statMeasNumbOfLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cycleCounterLbl
+            // 
+            this.cycleCounterLbl.AutoSize = true;
+            this.cycleCounterLbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cycleCounterLbl.ForeColor = System.Drawing.Color.SteelBlue;
+            this.cycleCounterLbl.Location = new System.Drawing.Point(54, 148);
+            this.cycleCounterLbl.Name = "cycleCounterLbl";
+            this.cycleCounterLbl.Size = new System.Drawing.Size(102, 16);
+            this.cycleCounterLbl.TabIndex = 16;
+            this.cycleCounterLbl.Text = "цикл:  100500";
+            this.cycleCounterLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // measTimeLbl
+            // 
+            this.measTimeLbl.AutoSize = true;
+            this.measTimeLbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.measTimeLbl.ForeColor = System.Drawing.Color.SteelBlue;
+            this.measTimeLbl.Location = new System.Drawing.Point(2, 148);
+            this.measTimeLbl.Name = "measTimeLbl";
+            this.measTimeLbl.Size = new System.Drawing.Size(45, 16);
+            this.measTimeLbl.TabIndex = 15;
+            this.measTimeLbl.Text = "00:00";
+            // 
+            // midStatMeasValLbl
+            // 
+            this.midStatMeasValLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.midStatMeasValLbl.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.midStatMeasValLbl.ForeColor = System.Drawing.Color.SteelBlue;
+            this.midStatMeasValLbl.Location = new System.Drawing.Point(252, 6);
+            this.midStatMeasValLbl.Name = "midStatMeasValLbl";
+            this.midStatMeasValLbl.Size = new System.Drawing.Size(298, 23);
+            this.midStatMeasValLbl.TabIndex = 14;
+            this.midStatMeasValLbl.Text = "промежуточное значение: 0.0 ГОм";
+            this.midStatMeasValLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // serviceParameters
             // 
@@ -416,14 +507,181 @@
             this.serviceParameters.TabIndex = 15;
             this.serviceParameters.Text = "Значение параметров испытания";
             // 
-            // manualMeasureForm
+            // normaFieldLbl
+            // 
+            this.normaFieldLbl.AutoSize = true;
+            this.normaFieldLbl.Location = new System.Drawing.Point(27, 268);
+            this.normaFieldLbl.Name = "normaFieldLbl";
+            this.normaFieldLbl.Size = new System.Drawing.Size(72, 13);
+            this.normaFieldLbl.TabIndex = 16;
+            this.normaFieldLbl.Text = "Норма, МОм";
+            // 
+            // normaField
+            // 
+            this.normaField.Location = new System.Drawing.Point(30, 284);
+            this.normaField.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.normaField.Name = "normaField";
+            this.normaField.Size = new System.Drawing.Size(90, 20);
+            this.normaField.TabIndex = 17;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(27, 123);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Температура, С°";
+            // 
+            // temperatureField
+            // 
+            this.temperatureField.Location = new System.Drawing.Point(30, 141);
+            this.temperatureField.Maximum = new decimal(new int[] {
+            35,
+            0,
+            0,
+            0});
+            this.temperatureField.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.temperatureField.Name = "temperatureField";
+            this.temperatureField.Size = new System.Drawing.Size(148, 20);
+            this.temperatureField.TabIndex = 19;
+            this.temperatureField.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // lengthQuantitMeasCb
+            // 
+            this.lengthQuantitMeasCb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lengthQuantitMeasCb.FormattingEnabled = true;
+            this.lengthQuantitMeasCb.Items.AddRange(new object[] {
+            "см",
+            "дм",
+            "м",
+            "км"});
+            this.lengthQuantitMeasCb.Location = new System.Drawing.Point(111, 362);
+            this.lengthQuantitMeasCb.Name = "lengthQuantitMeasCb";
+            this.lengthQuantitMeasCb.Size = new System.Drawing.Size(67, 21);
+            this.lengthQuantitMeasCb.TabIndex = 20;
+            // 
+            // bringingToLbl
+            // 
+            this.bringingToLbl.AutoSize = true;
+            this.bringingToLbl.Location = new System.Drawing.Point(27, 365);
+            this.bringingToLbl.Name = "bringingToLbl";
+            this.bringingToLbl.Size = new System.Drawing.Size(78, 13);
+            this.bringingToLbl.TabIndex = 21;
+            this.bringingToLbl.Text = "Приведение к";
+            // 
+            // materialHeightLbl
+            // 
+            this.materialHeightLbl.AutoSize = true;
+            this.materialHeightLbl.Location = new System.Drawing.Point(27, 357);
+            this.materialHeightLbl.Name = "materialHeightLbl";
+            this.materialHeightLbl.Size = new System.Drawing.Size(139, 13);
+            this.materialHeightLbl.TabIndex = 22;
+            this.materialHeightLbl.Text = "Толщина материала, мкм";
+            // 
+            // materialHeight
+            // 
+            this.materialHeight.Location = new System.Drawing.Point(30, 371);
+            this.materialHeight.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.materialHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.materialHeight.Name = "materialHeight";
+            this.materialHeight.Size = new System.Drawing.Size(148, 20);
+            this.materialHeight.TabIndex = 23;
+            this.materialHeight.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // isDegreeViewCheckBox
+            // 
+            this.isDegreeViewCheckBox.AutoSize = true;
+            this.isDegreeViewCheckBox.Location = new System.Drawing.Point(216, 304);
+            this.isDegreeViewCheckBox.Name = "isDegreeViewCheckBox";
+            this.isDegreeViewCheckBox.Size = new System.Drawing.Size(257, 17);
+            this.isDegreeViewCheckBox.TabIndex = 24;
+            this.isDegreeViewCheckBox.Text = "Отображать результат в степенном формате";
+            this.isDegreeViewCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(219, 394);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "label8";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(121, 268);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "t, мин";
+            // 
+            // minTimeToNorm
+            // 
+            this.minTimeToNorm.Location = new System.Drawing.Point(124, 284);
+            this.minTimeToNorm.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.minTimeToNorm.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.minTimeToNorm.Name = "minTimeToNorm";
+            this.minTimeToNorm.Size = new System.Drawing.Size(54, 20);
+            this.minTimeToNorm.TabIndex = 27;
+            this.minTimeToNorm.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // manualTeraMeasureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 416);
+            this.ClientSize = new System.Drawing.Size(784, 444);
+            this.Controls.Add(this.minTimeToNorm);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.isDegreeViewCheckBox);
+            this.Controls.Add(this.materialHeight);
+            this.Controls.Add(this.materialHeightLbl);
+            this.Controls.Add(this.bringingToLbl);
+            this.Controls.Add(this.lengthQuantitMeasCb);
+            this.Controls.Add(this.temperatureField);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.normaField);
+            this.Controls.Add(this.normaFieldLbl);
             this.Controls.Add(this.serviceParameters);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.diametersLbl);
             this.Controls.Add(this.materialLength);
             this.Controls.Add(this.materialLengthLbl);
             this.Controls.Add(this.bringingTypeCB);
@@ -435,7 +693,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.startMeasureBut);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "manualMeasureForm";
+            this.Name = "manualTeraMeasureForm";
             this.Text = "Ручные измерения";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.manualMeasureForm_FormClosing);
             this.groupBox1.ResumeLayout(false);
@@ -451,6 +709,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.materialLength)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.normaField)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.temperatureField)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.materialHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,9 +753,25 @@
         private System.Windows.Forms.ComboBox bringingTypeCB;
         private System.Windows.Forms.Label materialLengthLbl;
         private System.Windows.Forms.NumericUpDown materialLength;
-        private System.Windows.Forms.Label diametersLbl;
         private System.Windows.Forms.Label measureResultLbl;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label serviceParameters;
+        private System.Windows.Forms.Label statMeasNumbOfLbl;
+        private System.Windows.Forms.Label cycleCounterLbl;
+        private System.Windows.Forms.Label measTimeLbl;
+        private System.Windows.Forms.Label midStatMeasValLbl;
+        private System.Windows.Forms.Label normaLbl;
+        private System.Windows.Forms.Label normaFieldLbl;
+        private System.Windows.Forms.NumericUpDown normaField;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown temperatureField;
+        private System.Windows.Forms.ComboBox lengthQuantitMeasCb;
+        private System.Windows.Forms.Label bringingToLbl;
+        private System.Windows.Forms.Label materialHeightLbl;
+        private System.Windows.Forms.NumericUpDown materialHeight;
+        private System.Windows.Forms.CheckBox isDegreeViewCheckBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown minTimeToNorm;
     }
 }

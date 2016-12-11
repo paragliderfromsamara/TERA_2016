@@ -76,19 +76,40 @@ namespace TERA_2016
             string tableName = "bringing_types";
             string[][] sysadmParams =
             {
-                new string[] { "1","'Без приведения'"},
-                new string[] { "2","'Приведение к длине'"},
-                new string[] { "3","'Объёмное сопротивление'"},
-                new string[] { "4","'Поверхностное сопротивление'"},
+                new string[] { "1","'Без приведения'", "''"},
+                new string[] { "2","'Приведение к длине'", "'·'"},
+                new string[] { "3","'Объёмное сопротивление'", "'·м'"},
+                new string[] { "4","'Поверхностное сопротивление'", "''"},
             };
             string[] colsArray = {
                                     "id INT UNSIGNED AUTO_INCREMENT NOT NULL",
                                     "name TINYTEXT",
+                                    "result_prefix TINYTEXT",
                                     "PRIMARY KEY (id)"
                                  };
             checkAndAddTable(tableName, colsArray);
             addBasicDataToTable(tableName, sysadmParams);
         }
+        private void createBringingTypeQuantitativeMeasureTable()
+        {
+            string tableName = "bringing_types";
+            string[][] sysadmParams =
+            {
+                new string[] { "1","'Без приведения'", "''"},
+                new string[] { "2","'Приведение к длине'", "'·'"},
+                new string[] { "3","'Объёмное сопротивление'", "'·м'"},
+                new string[] { "4","'Поверхностное сопротивление'", "''"},
+            };
+            string[] colsArray = {
+                                    "id INT UNSIGNED AUTO_INCREMENT NOT NULL",
+                                    "name TINYTEXT",
+                                    "result_prefix TINYTEXT",
+                                    "PRIMARY KEY (id)"
+                                 };
+            checkAndAddTable(tableName, colsArray);
+            addBasicDataToTable(tableName, sysadmParams);
+        }
+
 
         private static void createCameraTypesTable()
         {

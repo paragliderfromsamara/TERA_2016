@@ -18,7 +18,7 @@ namespace TERA_2016
         public string user_type = "undefined";
         public string user_id = "undefined";
         public dbUsersForm dbUsersForm = null;
-        public measureForms.manualMeasureForm manualMeasureForm = null;
+        public measureForms.manualTeraMeasureForm manualMeasureForm = null;
         public byte[] getSerialNumberCommand = { 0x13, 0x00};
         public TeraDevice currentDevice = null;
         public mainForm()
@@ -89,7 +89,7 @@ namespace TERA_2016
             if (manualMeasureForm == null)
             {
                 checkCalibrationParams();
-                manualMeasureForm = new measureForms.manualMeasureForm(this);
+                manualMeasureForm = new measureForms.manualTeraMeasureForm(this);
                 manualMeasureForm.MdiParent = this;
                 manualMeasureForm.Show();
             }

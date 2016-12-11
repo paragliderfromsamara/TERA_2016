@@ -66,11 +66,14 @@
       <DependentUpon>coeffsSynchronyzeStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="deviceControl\TeraMeasure.cs" />
-    <Compile Include="measureForms\manualMeasureForm.cs">
+    <Compile Include="measureForms\manualTeraMeasureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="measureForms\manualMeasureForm.Designer.cs">
-      <DependentUpon>manualMeasureForm.cs</DependentUpon>
+    <Compile Include="measureForms\manualTeraMeasureForm.Designer.cs">
+      <DependentUpon>manualTeraMeasureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="measureForms\MeasureFormBase.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="measureSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -105,8 +108,8 @@
     <EmbeddedResource Include="deviceControl\coeffsSynchronyzeStatus.resx">
       <DependentUpon>coeffsSynchronyzeStatus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="measureForms\manualMeasureForm.resx">
-      <DependentUpon>manualMeasureForm.cs</DependentUpon>
+    <EmbeddedResource Include="measureForms\manualTeraMeasureForm.resx">
+      <DependentUpon>manualTeraMeasureForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="userControl\Signin.resx">
       <DependentUpon>Signin.cs</DependentUpon>
