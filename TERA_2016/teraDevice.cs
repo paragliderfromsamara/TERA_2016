@@ -40,6 +40,10 @@ namespace TERA_2016
         private string testString = "";
 
         /*--------------------------------*/
+        public TeraDevice()
+        {
+
+        }
         public TeraDevice(mainForm f, string _serial_number)
         {
             this.serial = _serial_number;
@@ -103,7 +107,7 @@ namespace TERA_2016
                 stsForm.completeStatus(1);
                 Thread.Sleep(200);
                 this.receiveCoeffs();
-                this.mForm.teraPort.Close();
+                this.mForm.CloseTeraPort();
                 stsForm.completeStatus(2);
                 cmd.CommandText = String.Format(query, this.serial, this.rangeCoeffs[0], this.rangeCoeffs[1], this.rangeCoeffs[2], this.rangeCoeffs[3], this.rangeCoeffs[4], this.voltageCoeffs[0], this.voltageCoeffs[1], this.voltageCoeffs[2], this.checkSumFromDevice);
                 dc.MyConn.Open();
@@ -130,16 +134,25 @@ namespace TERA_2016
         public int[] checkResult()
         {
             int[] result = { };
-            if (this.mForm.teraPort.BytesToRead == 8)
+            if (!this.mForm.isTestApp)
             {
-                result = new int[5];
-                result[0] = this.mForm.teraPort.ReadByte();
-                result[1] = this.mForm.teraPort.ReadByte();
-                result[2] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
-                result[3] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
-                result[4] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
-               
+                if (this.mForm.teraPort.BytesToRead == 8)
+                {
+                    result = new int[5];
+                    result[0] = this.mForm.teraPort.ReadByte();
+                    result[1] = this.mForm.teraPort.ReadByte();
+                    result[2] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
+                    result[3] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
+                    result[4] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
+
+                }
+            }else
+            {
+                Random r = new Random();
+                result = new int[] { 0, 2, r.Next(130, 133), r.Next(46, 48), r.Next(500, 510)};
+
             }
+
             return result;
         }
 
@@ -167,6 +180,14 @@ namespace TERA_2016
         {
             float[] range_coeffs = new float[this.rangeCoeffs.Length];
             float[] voltage_coeffs = new float[this.voltageCoeffs.Length];
+            if (this.mForm.isTestApp)
+            {
+                this.rangeCoeffs = this.mForm.appTest.rangeCoeffs();
+                this.voltageCoeffs = this.mForm.appTest.voltageCoeffs();
+                Thread.Sleep(100);
+                return;
+            }
+            //если приложение не в тестовом режиме
             for (int j=0; j< this.rangeCoeffs.Length; j++)
             {
 
@@ -181,11 +202,8 @@ namespace TERA_2016
             this.voltageCoeffs = voltage_coeffs;
             
         }
-        private void setSerialForThisDevice()
-        {
-            if (this.mForm.teraPort.IsOpen) this.mForm.teraPort.Close();
-            this.mForm.teraPort.PortName = this.portName;
-        }
+
+
         private float receiveDouble()
         {
             float val = 0;
@@ -194,7 +212,7 @@ namespace TERA_2016
             byte[] tmp = new byte[4];
             try
             {
-                tmp = this.mForm.receiveByteArray(4);
+                tmp = this.mForm.receiveByteArray(4, false);
                 arr = new byte[] { tmp[3], tmp[0], tmp[1], tmp[2]};
                 v = BitConverter.ToSingle(arr, 0);
                 val = ((float)v);
@@ -254,9 +272,9 @@ namespace TERA_2016
         /// <param name="bArr"></param>
         private void sendCommand(byte[] bArr)
         {
-          try
+            try
             {
-                this.mForm.teraPort.Write(bArr, 0, bArr.Length);
+                this.mForm.WriteTeraPort(bArr);
             }
             catch(Exception e)
             {
@@ -271,11 +289,16 @@ namespace TERA_2016
         /// <param name="needClose"></param>
         private void sendCommand(byte[] bArr, bool needClose)
         {
-            setSerialForThisDevice();
-            this.mForm.teraPort.Open();
-            sendCommand(bArr);
-            if (needClose){this.mForm.teraPort.Close();}
+            this.mForm.RenamePort(this.portName);
+            this.sendCommand(bArr);
+            if (needClose){this.mForm.CloseTeraPort();}
+        }
 
+        public static string makeTeraSerial(byte iY, byte iN)
+        {
+            string y = "20"+((iY < 10) ? "0" : "") + iY.ToString();
+            string n = ((iN < 10) ? "0" : "") + iN.ToString();
+            return y + "-" + n;
         }
     }
 }

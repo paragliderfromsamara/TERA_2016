@@ -68,6 +68,7 @@ namespace TERA_2016.deviceControl
                     this.teraMeasure.mForm.updateCycleNumberField((cycleCount+1).ToString());
                     this.teraMeasure.tDevice.startIntegrator();
                     if (!this.teraMeasure.getMeasureResult()) { TeraMeasure.measureError("Превышено время ожидания результата"); break; }
+                    if (Properties.Settings.Default.isTestApp) Thread.Sleep(2000);
                     result = this.teraMeasure.convertAdcResult();
                     averageResult += result;
                     if (this.teraMeasure.isStatistic) this.teraMeasure.mForm.updateStatMeasInfo(new string[] { String.Format("{0} из {1}", mCount+1, mCountLimit), this.teraMeasure.absoluteResultView(result) });
@@ -121,8 +122,6 @@ namespace TERA_2016.deviceControl
         public int cycleMeasureAmount = 1; //количество циклов измерений
         public int betweenMeasurePause = 100;   //Пауза между испытаниями
         public int minTimeToNorm = 1;
-
-
         public int voltageId = 0;                //код измерительного напряжения от 0 до 3
         public int voltageValue = 0;            //Значение измерительного напряжения
         public int polDelay = 0;                //время поляризации

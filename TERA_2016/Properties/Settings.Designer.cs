@@ -34,7 +34,7 @@ namespace TERA_2016.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool isTestApp {
             get {
                 return ((bool)(this["isTestApp"]));

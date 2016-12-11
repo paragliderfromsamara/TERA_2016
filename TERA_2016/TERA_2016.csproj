@@ -66,6 +66,7 @@
       <DependentUpon>coeffsSynchronyzeStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="deviceControl\TeraMeasure.cs" />
+    <Compile Include="forAppTest\appTest.cs" />
     <Compile Include="measureForms\manualTeraMeasureForm.cs">
       <SubType>Form</SubType>
     </Compile>

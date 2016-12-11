@@ -124,7 +124,7 @@ namespace TERA_2016.measureForms
             
             if (!teraMeas.isStart)
             {
-                if (!this.mForm.teraPort.IsOpen) this.mForm.teraPort.Open();
+                this.mForm.OpenTeraPort();
                 teraMeas.voltageId = voltageComboBox.SelectedIndex + 1;
                 teraMeas.voltageValue = Convert.ToInt32(voltageComboBox.Text);
                 teraMeas.cycleMeasureAmount = Convert.ToInt32(this.cycleTimes.Value);
@@ -152,7 +152,7 @@ namespace TERA_2016.measureForms
             }else
             {
                 teraMeas.stopTest();
-                this.mForm.teraPort.Close();
+                this.mForm.CloseTeraPort();
             }
             
         }
@@ -400,5 +400,7 @@ namespace TERA_2016.measureForms
             this.cycleCounterLbl.Text = this.statMeasNumbOfLbl.Text = this.midStatMeasValLbl.Text = this.measTimeLbl.Text = "";
             this.measureResultLbl.Text = "0.0 МОм";
         }
+
+
     }
 }

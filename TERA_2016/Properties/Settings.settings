@@ -6,7 +6,7 @@
       <Value Profile="(Default)">UserId=root;Server=localhost;Password=;CharacterSet=cp1251;</Value>
     </Setting>
     <Setting Name="isTestApp" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

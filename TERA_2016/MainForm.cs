@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
+using TERA_2016.forAppTest;
+using System.Globalization;
+
 namespace TERA_2016
 {
     public partial class mainForm : Form
@@ -21,10 +24,12 @@ namespace TERA_2016
         public measureForms.manualTeraMeasureForm manualMeasureForm = null;
         public byte[] getSerialNumberCommand = { 0x13, 0x00};
         public TeraDevice currentDevice = null;
+        public appTest appTest = null;
         public mainForm()
         {
             InitializeComponent();
-            
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("my");
+            Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator = ".";
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -35,6 +40,7 @@ namespace TERA_2016
             if (result == System.Windows.Forms.DialogResult.Cancel) this.Close();
             else if (result == System.Windows.Forms.DialogResult.OK)
             {
+                if (this.isTestApp) { this.appTest = new appTest(); }
                 sesUserName.Text = String.Format("{0} {1}.{2}.", signForm.userLastName, signForm.userFirstName[0], signForm.userThirdName[0]);
                 sesTabNum.Text = "Таб.номер: " + signForm.userTabNum;
                 sesRole.Text = "Должность: " + signForm.userRole;
@@ -43,22 +49,21 @@ namespace TERA_2016
                 signForm.Dispose();
                 checkTabsPermission();
                 findDevices();
-                
             }
         }
 
         private void findDevices()
         {
-            isConnected = getDevicePorts();
-            if (!isConnected)
-            {
-                MessageBox.Show("Нет ни одного подключённого Тераомметра");
-                SwitchDeviceMenus(false);
-            }
-            else
-            {
-                deviceList.SelectedIndex = 0;
-            }
+                this.isConnected = getDevicePorts();
+                if (!this.isConnected)
+                {
+                    MessageBox.Show("Нет ни одного подключённого Тераомметра");
+                    this.SwitchDeviceMenus(false);
+                }
+                else
+                {
+                    this.deviceList.SelectedIndex = 0;
+                }
         }
 
         private void SwitchDeviceMenus(bool v)
@@ -104,30 +109,23 @@ namespace TERA_2016
         private bool getTeraPortByName(string port_name) //Получение порта ЦПС по названию
         {
             byte[] arr;
-            if (teraPort.IsOpen) teraPort.Close();
+            this.CloseTeraPort();
             try
             {
-                teraPort.PortName = port_name;
-                teraPort.Open();
-                teraPort.Write(TeraDevice.getSerialWidthCheckSumCmd, 0, TeraDevice.getSerialWidthCheckSumCmd.Length);
-                Thread.Sleep(200);
-                arr = receiveByteArray(4);
-                teraPort.Close();
-
-                if (arr[0] < 50 && arr[0] > 10) //Проверка валидности номера ЦПС
+                arr = getSerialAndCheckSumFromTera(port_name);
+                if (arr[0] < 50 && arr[0] > 10) //Проверка валидности номера прибора
                 {
                     int _check_sum = (int)arr[2] + (int)arr[3] * 256;
-                    string serialNumber = String.Format("20{0}-{1}", arr[0], arr[1]);
+                    string serialNumber = TeraDevice.makeTeraSerial(arr[0], arr[1]);
                     deviceList.Items.Insert(0, serialNumber);
                     Thread.Sleep(100);
                     checkDeviceBySerial(serialNumber, _check_sum);
                     return true;
                 }
-                
             }
-            catch// (Exception e)
+            catch//(Exception e)
             {
-               //  MessageBox.Show(e.Message);
+                // MessageBox.Show(e.Message);
             }
             return false;
         }
@@ -141,16 +139,10 @@ namespace TERA_2016
         {
             byte[] arr;
             string tmpSerial;
-            if (teraPort.IsOpen) teraPort.Close();
             try
             {
-                teraPort.PortName = port_name;
-                teraPort.Open();
-                teraPort.Write(TeraDevice.getSerialWidthCheckSumCmd, 0, TeraDevice.getSerialWidthCheckSumCmd.Length);
-                Thread.Sleep(200);
-                arr = receiveByteArray(4);
-                teraPort.Close();
-                tmpSerial = String.Format("20{0}-{1}", arr[0], arr[1]);
+                arr = getSerialAndCheckSumFromTera(port_name);
+                tmpSerial = TeraDevice.makeTeraSerial(arr[0], arr[1]);
                 if (serial_number == tmpSerial) //Проверка соответствия найденного прибора
                 {
                     int _check_sum = (int)arr[2] + (int)arr[3] * 256;
@@ -169,7 +161,7 @@ namespace TERA_2016
                 }
                 
             }
-            catch //(Exception e)
+            catch// (Exception e)
             {
                 //MessageBox.Show(e.Message);
             }
@@ -177,7 +169,7 @@ namespace TERA_2016
         }
         public bool getDevicePorts()
         {
-            string[] port_list = SerialPort.GetPortNames();
+            string[] port_list = (!isTestApp) ? SerialPort.GetPortNames() : this.appTest.fakePortNumbers();
             bool f = false;
             for (int i = 0; i < port_list.Length; i++)
             {
@@ -191,14 +183,16 @@ namespace TERA_2016
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        public byte[] receiveByteArray(int n)
+        public byte[] receiveByteArray(int n, bool needToClose)
         {
             byte[] arr = new byte[n];
-            for(int i=0; i<n; i++)
+            this.OpenTeraPort();
+            for (int i=0; i<n; i++)
             {
                 arr[i] = (byte)teraPort.ReadByte();
                 Thread.Sleep(20);
             }
+            if (needToClose) this.CloseTeraPort();
             return arr;
         }
 
@@ -225,7 +219,7 @@ namespace TERA_2016
         }
         private bool connectToTera(string serial)
         {
-            string[] port_list = SerialPort.GetPortNames();
+            string[] port_list = (!this.isTestApp) ? SerialPort.GetPortNames() : this.appTest.fakePortNumbers();
             bool f = false;
             for (int i = 0; i < port_list.Length; i++)
             {
@@ -245,7 +239,7 @@ namespace TERA_2016
         }
         private void cleanCurrentDevice()
         {
-            if (this.currentDevice != null) { this.currentDevice.Disconnect(); Thread.Sleep(200); this.currentDevice = null; Thread.Sleep(200); }
+            if (this.currentDevice != null && !isTestApp) { this.currentDevice.Disconnect(); Thread.Sleep(200); this.currentDevice = null; Thread.Sleep(200); }
         }
 
         private void searchDevicesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -267,7 +261,7 @@ namespace TERA_2016
         /// </summary>
         private void checkCalibrationParams()
         {
-            if (currentDevice == null) return;
+            if (currentDevice == null && !isTestApp) return;
             if (currentDevice.checkSumFromDB != currentDevice.checkSumFromDevice)
             {
                 DialogResult r = MessageBox.Show("Обновить настройки?", "Необходимо обновить настройки прибора в БД", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -276,6 +270,47 @@ namespace TERA_2016
                     this.currentDevice.syncCoeffs(true);
                 }
             }
+        }
+
+        private byte[] getSerialAndCheckSumFromTera(string port_name)
+        {
+            if (!this.isTestApp)
+            {
+                byte[] arr;
+                this.RenamePort(port_name);
+                this.WriteTeraPort(TeraDevice.getSerialWidthCheckSumCmd);
+                Thread.Sleep(200);
+                arr = receiveByteArray(4, true);
+                return arr;
+            }
+            else
+            {
+                int p = Convert.ToInt32(port_name);
+                return this.appTest.fakeDevList[p];
+            }
+        }
+
+        public void CloseTeraPort()
+        {
+            if (!this.isTestApp && this.teraPort.IsOpen) this.teraPort.Close(); 
+        }
+
+        public void OpenTeraPort()
+        {
+            if (!this.isTestApp && !this.teraPort.IsOpen) this.teraPort.Open();
+        }
+
+        public void WriteTeraPort(byte[] ByteArray)
+        {
+            if (this.isTestApp) return;
+            this.OpenTeraPort();
+            this.teraPort.Write(ByteArray, 0, ByteArray.Length);
+        }
+
+        public void RenamePort(string name)
+        {
+            this.CloseTeraPort();
+            this.teraPort.PortName = name;
         }
     }
 }
