@@ -38,13 +38,10 @@
             this.testsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.handMeasureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deviceSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calibrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntrlConnectionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchDevicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.switchOffDeviceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deviceSettingsStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deviceList = new System.Windows.Forms.ToolStripComboBox();
             this.mainToolStrip = new System.Windows.Forms.StatusStrip();
             this.sesUserName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -61,7 +58,6 @@
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dbToolStripMenuItem,
             this.testsToolStripMenuItem,
-            this.deviceSettingsToolStripMenuItem,
             this.cntrlConnectionMenuItem,
             this.deviceList});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
@@ -128,33 +124,12 @@
             this.autoTestsToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
             this.autoTestsToolStripMenuItem.Text = "Автоматические испытания";
             // 
-            // deviceSettingsToolStripMenuItem
-            // 
-            this.deviceSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.calibrationToolStripMenuItem,
-            this.settingsToolStripMenuItem});
-            this.deviceSettingsToolStripMenuItem.Name = "deviceSettingsToolStripMenuItem";
-            this.deviceSettingsToolStripMenuItem.Size = new System.Drawing.Size(78, 23);
-            this.deviceSettingsToolStripMenuItem.Text = "Настройка";
-            // 
-            // calibrationToolStripMenuItem
-            // 
-            this.calibrationToolStripMenuItem.Name = "calibrationToolStripMenuItem";
-            this.calibrationToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.calibrationToolStripMenuItem.Text = "Калибровка";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
-            this.settingsToolStripMenuItem.Text = "Настройки";
-            // 
             // cntrlConnectionMenuItem
             // 
             this.cntrlConnectionMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.searchDevicesToolStripMenuItem,
             this.switchOffDeviceToolStripMenuItem,
-            this.настройкаToolStripMenuItem});
+            this.deviceSettingsStripMenuItem});
             this.cntrlConnectionMenuItem.Name = "cntrlConnectionMenuItem";
             this.cntrlConnectionMenuItem.Size = new System.Drawing.Size(146, 23);
             this.cntrlConnectionMenuItem.Text = "Управление прибором";
@@ -173,11 +148,11 @@
             this.switchOffDeviceToolStripMenuItem.Text = "Отключить прибор";
             this.switchOffDeviceToolStripMenuItem.Click += new System.EventHandler(this.switchOffDeviceToolStripMenuItem_Click);
             // 
-            // настройкаToolStripMenuItem
+            // deviceSettingsStripMenuItem
             // 
-            this.настройкаToolStripMenuItem.Name = "настройкаToolStripMenuItem";
-            this.настройкаToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.настройкаToolStripMenuItem.Text = "Настройка";
+            this.deviceSettingsStripMenuItem.Name = "deviceSettingsStripMenuItem";
+            this.deviceSettingsStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.deviceSettingsStripMenuItem.Text = "Настройка";
             // 
             // deviceList
             // 
@@ -260,9 +235,6 @@
         private System.Windows.Forms.ToolStripMenuItem testsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem handMeasureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoTestsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deviceSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calibrationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.StatusStrip mainToolStrip;
         private System.Windows.Forms.ToolStripStatusLabel sesUserName;
         private System.Windows.Forms.ToolStripStatusLabel sesTabNum;
@@ -273,7 +245,7 @@
         private System.Windows.Forms.ToolStripMenuItem cntrlConnectionMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchDevicesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem switchOffDeviceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem настройкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deviceSettingsStripMenuItem;
     }
 }
 

@@ -28,6 +28,7 @@ namespace TERA_2016
         public mainForm()
         {
             InitializeComponent();
+            if (this.isTestApp) { this.Text += " (Тестовый режим)"; }
             Thread.CurrentThread.CurrentCulture = new CultureInfo("my");
             Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator = ".";
         }
@@ -68,8 +69,9 @@ namespace TERA_2016
 
         private void SwitchDeviceMenus(bool v)
         {
-            deviceSettingsToolStripMenuItem.Enabled = testsToolStripMenuItem.Enabled = v;
-            
+            deviceSettingsStripMenuItem.Enabled = testsToolStripMenuItem.Enabled = v;
+            this.switchOffDeviceToolStripMenuItem.Enabled = v; //дисэйблит кнопку отключения устройства
+
         }
 
         private void checkTabsPermission()
@@ -175,6 +177,7 @@ namespace TERA_2016
             {
                 if (getTeraPortByName(port_list[i])) { f = true; }
             }
+            
             return f;
         }
 
@@ -235,7 +238,7 @@ namespace TERA_2016
 
         private void cleanDeviceList()
         {
-            for (int i = 0; i < deviceList.Items.Count; i++) deviceList.Items.RemoveAt(i);
+            //for (int i = 0; i < deviceList.Items.Count; i++) deviceList.Items.RemoveAt(i);
         }
         private void cleanCurrentDevice()
         {
@@ -245,7 +248,7 @@ namespace TERA_2016
         private void searchDevicesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cleanCurrentDevice();
-            cleanDeviceList();
+            deviceList.Items.Clear();
             findDevices();
         }
 

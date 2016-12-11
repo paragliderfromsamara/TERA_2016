@@ -25,7 +25,7 @@ namespace TERA_2016.measureForms
         protected delegate void updateCycleNumberFieldDelegate(string cycleNumb);
         protected delegate void updateStatMeasInfoDelegate(string[] statMeasInfo);
         protected delegate void refreshMeasureTimerDelegate(int[] time);
-
+        protected delegate void switchFieldsMeasureOnOffDelegate(bool flag);
 
         protected double getIsolationCoeff(int mIdx, int tIdx)
         {

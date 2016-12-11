@@ -79,12 +79,14 @@ namespace TERA_2016.deviceControl
                     averageResult = 0;
                     mCount = 0;
                     cycleCount++;
-                    if (!this.teraMeasure.isCyclic && cycleCount == this.teraMeasure.cycleMeasureAmount || this.teraMeasure.measStatus > 0) break;
+                    if ((!this.teraMeasure.isCyclic && cycleCount == this.teraMeasure.cycleMeasureAmount) || this.teraMeasure.measStatus > 0) break;
+                    
                     //счетчик циклов
                     //this.teraMeasure.mForm.updateResultField(this.teraMeasure.absoluteResultView(result));
                     //this.pause();
                 } while (true);
-                
+
+                this.teraMeasure.mForm.switchFieldsMeasureOnOff(true);
                 //this.teraMeasure.measTestForm.switchButtons(false);
             }
 
@@ -159,14 +161,22 @@ namespace TERA_2016.deviceControl
                 //measTestForm.mainForm.stendPort.Close();
                 mThread.thread.Abort();
                 mThread = null;
-                tThread.thread.Abort();
-                tThread = null;
+
                 //this.measTestForm.switchButtons(false);
 
             }
-            this.isStart = false;
-        }
+            if (tThread != null)
+            {
+                tThread.thread.Abort();
+                tThread = null;
+            }
 
+                this.isStart = false;
+        }
+        public bool isOnMeasure()
+        {
+            return this.mThread != null;
+        }
         private bool getMeasureResult()
         {
             this.tDevice.startIntegrator();

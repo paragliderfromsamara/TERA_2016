@@ -31,7 +31,9 @@
             this.voltageComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.startMeasureBut = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.measureSettingsGroup = new System.Windows.Forms.GroupBox();
+            this.minTimeToNorm = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             this.measureTimesLbl = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cycleTimes = new System.Windows.Forms.NumericUpDown();
@@ -41,6 +43,8 @@
             this.isCyclicMeasure = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.polarizationDelay = new System.Windows.Forms.NumericUpDown();
+            this.normaField = new System.Windows.Forms.NumericUpDown();
+            this.normaFieldLbl = new System.Windows.Forms.Label();
             this.manualTestDS = new System.Data.DataSet();
             this.camera_types = new System.Data.DataTable();
             this.camera_type_id = new System.Data.DataColumn();
@@ -69,8 +73,6 @@
             this.measTimeLbl = new System.Windows.Forms.Label();
             this.midStatMeasValLbl = new System.Windows.Forms.Label();
             this.serviceParameters = new System.Windows.Forms.Label();
-            this.normaFieldLbl = new System.Windows.Forms.Label();
-            this.normaField = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.temperatureField = new System.Windows.Forms.NumericUpDown();
             this.lengthQuantitMeasCb = new System.Windows.Forms.ComboBox();
@@ -79,23 +81,21 @@
             this.materialHeight = new System.Windows.Forms.NumericUpDown();
             this.isDegreeViewCheckBox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.minTimeToNorm = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1.SuspendLayout();
+            this.measureSettingsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cycleTimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.averagingTimes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dischargeDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.polarizationDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normaField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.manualTestDS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camera_types)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.isolation_materials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bringing_types)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialLength)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.normaField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.temperatureField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).BeginInit();
             this.SuspendLayout();
             // 
             // voltageComboBox
@@ -107,7 +107,7 @@
             "100",
             "500",
             "1000"});
-            this.voltageComboBox.Location = new System.Drawing.Point(18, 42);
+            this.voltageComboBox.Location = new System.Drawing.Point(15, 41);
             this.voltageComboBox.Name = "voltageComboBox";
             this.voltageComboBox.Size = new System.Drawing.Size(94, 21);
             this.voltageComboBox.TabIndex = 0;
@@ -115,7 +115,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 26);
+            this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 1;
@@ -132,39 +132,74 @@
             this.startMeasureBut.UseVisualStyleBackColor = false;
             this.startMeasureBut.Click += new System.EventHandler(this.startMeasureBut_Click);
             // 
-            // groupBox1
+            // measureSettingsGroup
             // 
-            this.groupBox1.Controls.Add(this.measureTimesLbl);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.cycleTimes);
-            this.groupBox1.Controls.Add(this.averagingTimes);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.dischargeDelay);
-            this.groupBox1.Controls.Add(this.isCyclicMeasure);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.polarizationDelay);
-            this.groupBox1.Controls.Add(this.voltageComboBox);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(760, 95);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Настройки измерителя";
+            this.measureSettingsGroup.Controls.Add(this.minTimeToNorm);
+            this.measureSettingsGroup.Controls.Add(this.label9);
+            this.measureSettingsGroup.Controls.Add(this.measureTimesLbl);
+            this.measureSettingsGroup.Controls.Add(this.label4);
+            this.measureSettingsGroup.Controls.Add(this.cycleTimes);
+            this.measureSettingsGroup.Controls.Add(this.averagingTimes);
+            this.measureSettingsGroup.Controls.Add(this.label3);
+            this.measureSettingsGroup.Controls.Add(this.dischargeDelay);
+            this.measureSettingsGroup.Controls.Add(this.isCyclicMeasure);
+            this.measureSettingsGroup.Controls.Add(this.label2);
+            this.measureSettingsGroup.Controls.Add(this.polarizationDelay);
+            this.measureSettingsGroup.Controls.Add(this.voltageComboBox);
+            this.measureSettingsGroup.Controls.Add(this.normaField);
+            this.measureSettingsGroup.Controls.Add(this.normaFieldLbl);
+            this.measureSettingsGroup.Controls.Add(this.label1);
+            this.measureSettingsGroup.Location = new System.Drawing.Point(12, 12);
+            this.measureSettingsGroup.Name = "measureSettingsGroup";
+            this.measureSettingsGroup.Size = new System.Drawing.Size(760, 95);
+            this.measureSettingsGroup.TabIndex = 3;
+            this.measureSettingsGroup.TabStop = false;
+            this.measureSettingsGroup.Text = "Настройки измерителя";
+            // 
+            // minTimeToNorm
+            // 
+            this.minTimeToNorm.Location = new System.Drawing.Point(224, 42);
+            this.minTimeToNorm.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.minTimeToNorm.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.minTimeToNorm.Name = "minTimeToNorm";
+            this.minTimeToNorm.Size = new System.Drawing.Size(54, 20);
+            this.minTimeToNorm.TabIndex = 27;
+            this.minTimeToNorm.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(221, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "t, мин";
             // 
             // measureTimesLbl
             // 
             this.measureTimesLbl.AutoSize = true;
             this.measureTimesLbl.Location = new System.Drawing.Point(591, 26);
             this.measureTimesLbl.Name = "measureTimesLbl";
-            this.measureTimesLbl.Size = new System.Drawing.Size(125, 13);
+            this.measureTimesLbl.Size = new System.Drawing.Size(105, 13);
             this.measureTimesLbl.TabIndex = 10;
-            this.measureTimesLbl.Text = "Количество измерений";
+            this.measureTimesLbl.Text = "Количество циклов";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(332, 26);
+            this.label4.Location = new System.Drawing.Point(487, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 7;
@@ -172,7 +207,7 @@
             // 
             // cycleTimes
             // 
-            this.cycleTimes.Location = new System.Drawing.Point(594, 41);
+            this.cycleTimes.Location = new System.Drawing.Point(590, 43);
             this.cycleTimes.Minimum = new decimal(new int[] {
             1,
             0,
@@ -189,7 +224,7 @@
             // 
             // averagingTimes
             // 
-            this.averagingTimes.Location = new System.Drawing.Point(335, 42);
+            this.averagingTimes.Location = new System.Drawing.Point(490, 43);
             this.averagingTimes.Minimum = new decimal(new int[] {
             1,
             0,
@@ -207,7 +242,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(226, 26);
+            this.label3.Location = new System.Drawing.Point(384, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 5;
@@ -215,7 +250,7 @@
             // 
             // dischargeDelay
             // 
-            this.dischargeDelay.Location = new System.Drawing.Point(229, 42);
+            this.dischargeDelay.Location = new System.Drawing.Point(387, 42);
             this.dischargeDelay.Name = "dischargeDelay";
             this.dischargeDelay.Size = new System.Drawing.Size(94, 20);
             this.dischargeDelay.TabIndex = 4;
@@ -223,7 +258,7 @@
             // isCyclicMeasure
             // 
             this.isCyclicMeasure.AutoSize = true;
-            this.isCyclicMeasure.Location = new System.Drawing.Point(445, 43);
+            this.isCyclicMeasure.Location = new System.Drawing.Point(590, 72);
             this.isCyclicMeasure.Name = "isCyclicMeasure";
             this.isCyclicMeasure.Size = new System.Drawing.Size(140, 17);
             this.isCyclicMeasure.TabIndex = 8;
@@ -234,7 +269,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(121, 26);
+            this.label2.Location = new System.Drawing.Point(281, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 3;
@@ -242,10 +277,31 @@
             // 
             // polarizationDelay
             // 
-            this.polarizationDelay.Location = new System.Drawing.Point(124, 42);
+            this.polarizationDelay.Location = new System.Drawing.Point(284, 42);
             this.polarizationDelay.Name = "polarizationDelay";
             this.polarizationDelay.Size = new System.Drawing.Size(94, 20);
             this.polarizationDelay.TabIndex = 2;
+            // 
+            // normaField
+            // 
+            this.normaField.Location = new System.Drawing.Point(124, 42);
+            this.normaField.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.normaField.Name = "normaField";
+            this.normaField.Size = new System.Drawing.Size(90, 20);
+            this.normaField.TabIndex = 17;
+            // 
+            // normaFieldLbl
+            // 
+            this.normaFieldLbl.AutoSize = true;
+            this.normaFieldLbl.Location = new System.Drawing.Point(121, 26);
+            this.normaFieldLbl.Name = "normaFieldLbl";
+            this.normaFieldLbl.Size = new System.Drawing.Size(72, 13);
+            this.normaFieldLbl.TabIndex = 16;
+            this.normaFieldLbl.Text = "Норма, МОм";
             // 
             // manualTestDS
             // 
@@ -334,7 +390,7 @@
             // cameraLbl
             // 
             this.cameraLbl.AutoSize = true;
-            this.cameraLbl.Location = new System.Drawing.Point(27, 316);
+            this.cameraLbl.Location = new System.Drawing.Point(24, 271);
             this.cameraLbl.Name = "cameraLbl";
             this.cameraLbl.Size = new System.Drawing.Size(151, 13);
             this.cameraLbl.TabIndex = 6;
@@ -346,7 +402,7 @@
             this.cameraTypesCB.DisplayMember = "camera_types.name";
             this.cameraTypesCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cameraTypesCB.FormattingEnabled = true;
-            this.cameraTypesCB.Location = new System.Drawing.Point(30, 332);
+            this.cameraTypesCB.Location = new System.Drawing.Point(30, 287);
             this.cameraTypesCB.Name = "cameraTypesCB";
             this.cameraTypesCB.Size = new System.Drawing.Size(148, 21);
             this.cameraTypesCB.TabIndex = 7;
@@ -378,7 +434,7 @@
             // materialLengthLbl
             // 
             this.materialLengthLbl.AutoSize = true;
-            this.materialLengthLbl.Location = new System.Drawing.Point(27, 316);
+            this.materialLengthLbl.Location = new System.Drawing.Point(24, 271);
             this.materialLengthLbl.Name = "materialLengthLbl";
             this.materialLengthLbl.Size = new System.Drawing.Size(93, 13);
             this.materialLengthLbl.TabIndex = 10;
@@ -391,7 +447,7 @@
             0,
             0,
             0});
-            this.materialLength.Location = new System.Drawing.Point(30, 332);
+            this.materialLength.Location = new System.Drawing.Point(30, 287);
             this.materialLength.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -507,27 +563,6 @@
             this.serviceParameters.TabIndex = 15;
             this.serviceParameters.Text = "Значение параметров испытания";
             // 
-            // normaFieldLbl
-            // 
-            this.normaFieldLbl.AutoSize = true;
-            this.normaFieldLbl.Location = new System.Drawing.Point(27, 268);
-            this.normaFieldLbl.Name = "normaFieldLbl";
-            this.normaFieldLbl.Size = new System.Drawing.Size(72, 13);
-            this.normaFieldLbl.TabIndex = 16;
-            this.normaFieldLbl.Text = "Норма, МОм";
-            // 
-            // normaField
-            // 
-            this.normaField.Location = new System.Drawing.Point(30, 284);
-            this.normaField.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.normaField.Name = "normaField";
-            this.normaField.Size = new System.Drawing.Size(90, 20);
-            this.normaField.TabIndex = 17;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -568,7 +603,7 @@
             "дм",
             "м",
             "км"});
-            this.lengthQuantitMeasCb.Location = new System.Drawing.Point(111, 362);
+            this.lengthQuantitMeasCb.Location = new System.Drawing.Point(111, 332);
             this.lengthQuantitMeasCb.Name = "lengthQuantitMeasCb";
             this.lengthQuantitMeasCb.Size = new System.Drawing.Size(67, 21);
             this.lengthQuantitMeasCb.TabIndex = 20;
@@ -576,7 +611,7 @@
             // bringingToLbl
             // 
             this.bringingToLbl.AutoSize = true;
-            this.bringingToLbl.Location = new System.Drawing.Point(27, 365);
+            this.bringingToLbl.Location = new System.Drawing.Point(27, 335);
             this.bringingToLbl.Name = "bringingToLbl";
             this.bringingToLbl.Size = new System.Drawing.Size(78, 13);
             this.bringingToLbl.TabIndex = 21;
@@ -585,7 +620,7 @@
             // materialHeightLbl
             // 
             this.materialHeightLbl.AutoSize = true;
-            this.materialHeightLbl.Location = new System.Drawing.Point(27, 357);
+            this.materialHeightLbl.Location = new System.Drawing.Point(27, 318);
             this.materialHeightLbl.Name = "materialHeightLbl";
             this.materialHeightLbl.Size = new System.Drawing.Size(139, 13);
             this.materialHeightLbl.TabIndex = 22;
@@ -593,7 +628,7 @@
             // 
             // materialHeight
             // 
-            this.materialHeight.Location = new System.Drawing.Point(30, 371);
+            this.materialHeight.Location = new System.Drawing.Point(30, 333);
             this.materialHeight.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -632,44 +667,11 @@
             this.label8.TabIndex = 25;
             this.label8.Text = "label8";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(121, 268);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 13);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "t, мин";
-            // 
-            // minTimeToNorm
-            // 
-            this.minTimeToNorm.Location = new System.Drawing.Point(124, 284);
-            this.minTimeToNorm.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.minTimeToNorm.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.minTimeToNorm.Name = "minTimeToNorm";
-            this.minTimeToNorm.Size = new System.Drawing.Size(54, 20);
-            this.minTimeToNorm.TabIndex = 27;
-            this.minTimeToNorm.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // manualTeraMeasureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 444);
-            this.Controls.Add(this.minTimeToNorm);
-            this.Controls.Add(this.label9);
+            this.ClientSize = new System.Drawing.Size(788, 444);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.isDegreeViewCheckBox);
             this.Controls.Add(this.materialHeight);
@@ -678,8 +680,6 @@
             this.Controls.Add(this.lengthQuantitMeasCb);
             this.Controls.Add(this.temperatureField);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.normaField);
-            this.Controls.Add(this.normaFieldLbl);
             this.Controls.Add(this.serviceParameters);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.materialLength);
@@ -690,18 +690,20 @@
             this.Controls.Add(this.cameraLbl);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.materialTypes);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.measureSettingsGroup);
             this.Controls.Add(this.startMeasureBut);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "manualTeraMeasureForm";
             this.Text = "Ручные измерения";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.manualMeasureForm_FormClosing);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.measureSettingsGroup.ResumeLayout(false);
+            this.measureSettingsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cycleTimes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.averagingTimes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dischargeDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.polarizationDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normaField)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.manualTestDS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camera_types)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.isolation_materials)).EndInit();
@@ -709,10 +711,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.materialLength)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.normaField)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.temperatureField)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.materialHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -723,7 +723,7 @@
         private System.Windows.Forms.ComboBox voltageComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button startMeasureBut;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox measureSettingsGroup;
         private System.Windows.Forms.Label measureTimesLbl;
         private System.Windows.Forms.NumericUpDown cycleTimes;
         private System.Windows.Forms.CheckBox isCyclicMeasure;

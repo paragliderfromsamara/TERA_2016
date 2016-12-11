@@ -122,7 +122,7 @@ namespace TERA_2016.measureForms
         private void startMeasureBut_Click(object sender, EventArgs e)
         {
             
-            if (!teraMeas.isStart)
+            if (!this.teraMeas.isOnMeasure())
             {
                 this.mForm.OpenTeraPort();
                 teraMeas.voltageId = voltageComboBox.SelectedIndex + 1;
@@ -149,12 +149,8 @@ namespace TERA_2016.measureForms
                 measureSettings.Default.isDegreeView = isDegreeViewCheckBox.Checked;
                 measureSettings.Default.minTimeToNorm = Convert.ToInt32(minTimeToNorm.Value);
                 teraMeas.startTest();
-            }else
-            {
-                teraMeas.stopTest();
-                this.mForm.CloseTeraPort();
-            }
-            
+                
+            }else this.switchFieldsMeasureOnOff(true);
         }
 
         private void bringingTypeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -205,6 +201,25 @@ namespace TERA_2016.measureForms
             }
         }
 
+        public void switchFieldsMeasureOnOff(bool flag) //Для обновления поля результата из другого потока в котором проходит испытание
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new switchFieldsMeasureOnOffDelegate(switchFieldsMeasureOnOff), new object[] { flag });
+                return;
+            }
+            else
+            {
+                this.measureSettingsGroup.Enabled = flag;
+                startMeasureBut.Text = flag ? "ПУСК ИЗМЕРЕНИЯ" : "ОСТАНОВИТЬ ИЗМЕРЕНИЯ";
+                if (!flag)
+                {
+                    teraMeas.stopTest();
+                    this.mForm.CloseTeraPort();
+                }
+            }
+        }
+
         public void updateServiceField(string serviceInfo) //Для обновления поля результата из другого потока в котором проходит испытание
         {
             if (InvokeRequired)
@@ -228,6 +243,7 @@ namespace TERA_2016.measureForms
             else
             {
                 this.cycleCounterLbl.Text = "Цикл: " + cycleNumb;
+                
             }
         }
 
@@ -255,7 +271,6 @@ namespace TERA_2016.measureForms
                     this.measureResultLbl.Text = absoluteResultView(result); //absoluteResultView(result);
                     this.normaLbl.Text = (this.normaField.Value > 0) ? "норма: " + absoluteResultView((double)this.normaField.Value / 1000) : "";
                 }
-
             }
         }
 
@@ -343,7 +358,7 @@ namespace TERA_2016.measureForms
                 if (cResult) break;
             }
             r /= Math.Pow(10, dg);
-            return String.Format("{0} Е{1} МОм{0}", Math.Round(r, 2), dg, getBringingName());
+            return String.Format("{0}Е{1} МОм{2}", Math.Round(r, 2), dg, getBringingName());
         }
 
         
@@ -363,7 +378,6 @@ namespace TERA_2016.measureForms
                     break;
                 case "4":
                     break;
-            
             }
             label8.Text = coeff.ToString();
             return coeff;
@@ -397,7 +411,7 @@ namespace TERA_2016.measureForms
 
         private void cleanMeasInfo()
         {
-            this.cycleCounterLbl.Text = this.statMeasNumbOfLbl.Text = this.midStatMeasValLbl.Text = this.measTimeLbl.Text = "";
+            this.measTimeLbl.Text = this.normaLbl.Text = this.cycleCounterLbl.Text = this.statMeasNumbOfLbl.Text = this.midStatMeasValLbl.Text = this.measTimeLbl.Text = "";
             this.measureResultLbl.Text = "0.0 МОм";
         }
 
