@@ -11,8 +11,8 @@ namespace TERA_2016.forAppTest
 
         public byte[][] fakeDevList = new byte[][] {
                                                        new byte[]{ 15, 36, 114, 152},
-                                                       new byte[]{ 14, 13, 66, 25},
-                                                       new byte[]{ 12, 33, 45, 210},
+                                                       //new byte[]{ 14, 13, 66, 25},
+                                                       //new byte[]{ 12, 33, 45, 210},
                                                        //new byte[]{ 16, 3, 195, 133},
                                                        //new byte[]{ 13, 23, 251, 23},
                                                        //new byte[]{ 15, 2, 111, 222}

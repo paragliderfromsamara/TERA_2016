@@ -80,7 +80,7 @@
             this.materialHeightLbl = new System.Windows.Forms.Label();
             this.materialHeight = new System.Windows.Forms.NumericUpDown();
             this.isDegreeViewCheckBox = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.closeBut = new System.Windows.Forms.Button();
             this.measureSettingsGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minTimeToNorm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cycleTimes)).BeginInit();
@@ -124,9 +124,9 @@
             // startMeasureBut
             // 
             this.startMeasureBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.startMeasureBut.Location = new System.Drawing.Point(216, 332);
+            this.startMeasureBut.Location = new System.Drawing.Point(216, 348);
             this.startMeasureBut.Name = "startMeasureBut";
-            this.startMeasureBut.Size = new System.Drawing.Size(556, 46);
+            this.startMeasureBut.Size = new System.Drawing.Size(555, 46);
             this.startMeasureBut.TabIndex = 2;
             this.startMeasureBut.Text = "ПУСК ИЗМЕРЕНИЯ";
             this.startMeasureBut.UseVisualStyleBackColor = false;
@@ -489,7 +489,7 @@
             this.panel1.Controls.Add(this.measTimeLbl);
             this.panel1.Controls.Add(this.midStatMeasValLbl);
             this.panel1.Controls.Add(this.measureResultLbl);
-            this.panel1.Location = new System.Drawing.Point(216, 123);
+            this.panel1.Location = new System.Drawing.Point(216, 139);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(555, 175);
             this.panel1.TabIndex = 14;
@@ -557,7 +557,7 @@
             // serviceParameters
             // 
             this.serviceParameters.AutoSize = true;
-            this.serviceParameters.Location = new System.Drawing.Point(213, 107);
+            this.serviceParameters.Location = new System.Drawing.Point(213, 123);
             this.serviceParameters.Name = "serviceParameters";
             this.serviceParameters.Size = new System.Drawing.Size(177, 13);
             this.serviceParameters.TabIndex = 15;
@@ -651,28 +651,30 @@
             // isDegreeViewCheckBox
             // 
             this.isDegreeViewCheckBox.AutoSize = true;
-            this.isDegreeViewCheckBox.Location = new System.Drawing.Point(216, 304);
+            this.isDegreeViewCheckBox.Location = new System.Drawing.Point(216, 323);
             this.isDegreeViewCheckBox.Name = "isDegreeViewCheckBox";
             this.isDegreeViewCheckBox.Size = new System.Drawing.Size(257, 17);
             this.isDegreeViewCheckBox.TabIndex = 24;
             this.isDegreeViewCheckBox.Text = "Отображать результат в степенном формате";
             this.isDegreeViewCheckBox.UseVisualStyleBackColor = true;
             // 
-            // label8
+            // closeBut
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(219, 394);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "label8";
+            this.closeBut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.closeBut.Location = new System.Drawing.Point(635, 411);
+            this.closeBut.Name = "closeBut";
+            this.closeBut.Size = new System.Drawing.Size(136, 37);
+            this.closeBut.TabIndex = 25;
+            this.closeBut.Text = "выйти";
+            this.closeBut.UseVisualStyleBackColor = true;
+            this.closeBut.Click += new System.EventHandler(this.closeBut_Click);
             // 
             // manualTeraMeasureForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(788, 444);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(788, 460);
+            this.Controls.Add(this.closeBut);
             this.Controls.Add(this.isDegreeViewCheckBox);
             this.Controls.Add(this.materialHeight);
             this.Controls.Add(this.materialHeightLbl);
@@ -770,8 +772,8 @@
         private System.Windows.Forms.Label materialHeightLbl;
         private System.Windows.Forms.NumericUpDown materialHeight;
         private System.Windows.Forms.CheckBox isDegreeViewCheckBox;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown minTimeToNorm;
+        private System.Windows.Forms.Button closeBut;
     }
 }

@@ -116,11 +116,24 @@ namespace TERA_2016.measureForms
 
         private void manualMeasureForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mForm.manualMeasureForm = null;
-            if (this.teraMeas != null)
+            if (this.teraMeas.isStart)
             {
-                if (this.teraMeas.isStart) this.teraMeas.stopTest();
+                DialogResult r = MessageBox.Show("В данный момент прибор измеряет. Прервать измерение?", "Идут измерения",  MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    mForm.manualMeasureForm = null;
+                    if (this.teraMeas != null)
+                    {
+                        if (this.teraMeas.isStart) this.teraMeas.stopTest();
+                    }
+                    this.switchFieldsMeasureOnOff(true);
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
+
         }
 
         private void startMeasureBut_Click(object sender, EventArgs e)
@@ -159,15 +172,19 @@ namespace TERA_2016.measureForms
                 int[] resultArray = new int[] { };
                 teraMeas.stopTest();
                 Thread.Sleep(300);
-                this.mForm.teraPort.DiscardInBuffer();
-                //this.mForm.currentDevic
-                this.mForm.currentDevice.stopMeasure();
-                do
+                if (!this.mForm.isTestApp)
                 {
-                    resultArray = this.mForm.currentDevice.checkResult();
-                } while (resultArray.Length == 0);
-                MessageBox.Show(String.Format("Статус: {0}; Диапазон: {1}; Длительность: {2}; Начальное состояние: {3}; Конечное состояние: {4};", resultArray[0], resultArray[1], resultArray[2], resultArray[3], resultArray[4]));
-                if (resultArray[0] == 1) switchFieldsMeasureOnOff(true);
+                    this.mForm.teraPort.DiscardInBuffer();
+                    this.mForm.currentDevice.stopMeasure();
+                    do
+                    {
+                        resultArray = this.mForm.currentDevice.checkResult();
+                    } while (resultArray.Length == 0);
+                    MessageBox.Show(String.Format("Статус: {0}; Диапазон: {1}; Длительность: {2}; Начальное состояние: {3}; Конечное состояние: {4};", resultArray[0], resultArray[1], resultArray[2], resultArray[3], resultArray[4]));
+                    if (resultArray[0] == 1) switchFieldsMeasureOnOff(true);
+                }else switchFieldsMeasureOnOff(true);
+                //this.mForm.currentDevic
+
 
             }
             //else { this.mForm.currentDevice.stopMeasure();}//this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
@@ -404,7 +421,7 @@ namespace TERA_2016.measureForms
                 case "4":
                     break;
             }
-            label8.Text = coeff.ToString();
+            //label8.Text = coeff.ToString();
             return coeff;
             /*
              * float ConvertByMeasureMode(float _R) //Конвертирует результат в соответствии с текущим режимом испытания
@@ -433,6 +450,13 @@ namespace TERA_2016.measureForms
                 }
              */
         }
+
+        private void closeBut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            
+        }
+
 
         private void cleanMeasInfo()
         {
