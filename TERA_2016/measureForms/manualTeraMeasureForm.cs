@@ -117,11 +117,15 @@ namespace TERA_2016.measureForms
         private void manualMeasureForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             mForm.manualMeasureForm = null;
+            if (this.teraMeas != null)
+            {
+                if (this.teraMeas.isStart) this.teraMeas.stopTest();
+            }
         }
 
         private void startMeasureBut_Click(object sender, EventArgs e)
         {
-            
+            //MessageBox.Show(this.teraMeas.isOnMeasure().ToString());
             if (!this.teraMeas.isOnMeasure())
             {
                 this.mForm.OpenTeraPort();
@@ -131,7 +135,7 @@ namespace TERA_2016.measureForms
                 teraMeas.isCyclic = this.isCyclicMeasure.Checked;
                 teraMeas.isStatistic = this.averagingTimes.Value > 1;
                 teraMeas.statisticMeasureAmount = Convert.ToInt32(this.averagingTimes.Value);
-            
+
                 measureSettings.Default.voltage = Convert.ToInt16(voltageComboBox.Text);
                 measureSettings.Default.dischargeDelay = Convert.ToInt16(dischargeDelay.Value);
                 measureSettings.Default.polarizationDelay = Convert.ToInt16(polarizationDelay.Value);
@@ -148,9 +152,11 @@ namespace TERA_2016.measureForms
                 measureSettings.Default.materialHeight = Convert.ToInt32(this.materialHeight.Value);
                 measureSettings.Default.isDegreeView = isDegreeViewCheckBox.Checked;
                 measureSettings.Default.minTimeToNorm = Convert.ToInt32(minTimeToNorm.Value);
-                teraMeas.startTest();
+                //this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
                 
-            }else this.switchFieldsMeasureOnOff(true);
+
+            }
+            this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
         }
 
         private void bringingTypeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -212,10 +218,13 @@ namespace TERA_2016.measureForms
             {
                 this.measureSettingsGroup.Enabled = flag;
                 startMeasureBut.Text = flag ? "ПУСК ИЗМЕРЕНИЯ" : "ОСТАНОВИТЬ ИЗМЕРЕНИЯ";
-                if (!flag)
+                if (flag)
                 {
                     teraMeas.stopTest();
                     this.mForm.CloseTeraPort();
+                }else
+                {
+                    teraMeas.startTest();
                 }
             }
         }
