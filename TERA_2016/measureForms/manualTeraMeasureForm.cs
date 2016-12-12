@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace TERA_2016.measureForms
 {
@@ -80,7 +81,6 @@ namespace TERA_2016.measureForms
         private void buildIsolationMaterialArr()
         {
             int materialsNumb = this.materialTypes.Items.Count;
-            //double[] defArr = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
             double[][] resultArr = new double[materialsNumb][];          
             DBControl dc = new DBControl(dbSettings.Default.dbName);
             MySqlDataAdapter da = new MySqlDataAdapter();
@@ -152,11 +152,26 @@ namespace TERA_2016.measureForms
                 measureSettings.Default.materialHeight = Convert.ToInt32(this.materialHeight.Value);
                 measureSettings.Default.isDegreeView = isDegreeViewCheckBox.Checked;
                 measureSettings.Default.minTimeToNorm = Convert.ToInt32(minTimeToNorm.Value);
-                //this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
-                
+                this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
+            }
+            else
+            {
+                int[] resultArray = new int[] { };
+                teraMeas.stopTest();
+                Thread.Sleep(300);
+                this.mForm.teraPort.DiscardInBuffer();
+                //this.mForm.currentDevic
+                this.mForm.currentDevice.stopMeasure();
+                do
+                {
+                    resultArray = this.mForm.currentDevice.checkResult();
+                } while (resultArray.Length == 0);
+                MessageBox.Show(String.Format("Статус: {0}; Диапазон: {1}; Длительность: {2}; Начальное состояние: {3}; Конечное состояние: {4};", resultArray[0], resultArray[1], resultArray[2], resultArray[3], resultArray[4]));
+                if (resultArray[0] == 1) switchFieldsMeasureOnOff(true);
 
             }
-            this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
+            //else { this.mForm.currentDevice.stopMeasure();}//this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
+            //this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
         }
 
         private void bringingTypeCB_SelectedIndexChanged(object sender, EventArgs e)
@@ -220,8 +235,9 @@ namespace TERA_2016.measureForms
                 startMeasureBut.Text = flag ? "ПУСК ИЗМЕРЕНИЯ" : "ОСТАНОВИТЬ ИЗМЕРЕНИЯ";
                 if (flag)
                 {
-                    teraMeas.stopTest();
+
                     this.mForm.CloseTeraPort();
+
                 }else
                 {
                     teraMeas.startTest();

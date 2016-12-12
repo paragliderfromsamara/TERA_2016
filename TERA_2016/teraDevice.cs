@@ -37,6 +37,7 @@ namespace TERA_2016
         public static byte[] startIntegratorCmd = { 0x99, 0x77 }; //запуск интегрирования
         public static byte[] retentionVoltageCmd = { 0x99, 0x00 }; //удержание напряжения при установленном времени поляризации, иначе при установленном времени поляризации через 4 секунды произойдёт отключение источника напряжения
         public static byte[] setVoltageCmd = { 0x77, 0xC0 }; //запуск источника напряжения, в зависимости от выставляемого напряжения второй байт будет принимать значения для 10В - 0 
+        public static byte[] turnOffVoltage = { 0x77, 0x00 };
         private string testString = "";
 
         /*--------------------------------*/
@@ -139,7 +140,7 @@ namespace TERA_2016
                 if (this.mForm.teraPort.BytesToRead == 8)
                 {
                     result = new int[5];
-                    result[0] = this.mForm.teraPort.ReadByte();
+                    result[0] = 0x0F & this.mForm.teraPort.ReadByte();
                     result[1] = this.mForm.teraPort.ReadByte();
                     result[2] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
                     result[3] = this.mForm.teraPort.ReadByte() + this.mForm.teraPort.ReadByte() * 256;
@@ -169,6 +170,13 @@ namespace TERA_2016
             newCmd = new byte[] { b1, b2 };
             this.sendCommand(newCmd);
         }
+
+        public void stopMeasure()
+        {
+            setVoltage(0);
+            //Thread.Sleep(100);
+        }
+
         /// <summary>
         /// Посылает флаг удержания напряжения, чтобы источник не выключился
         /// </summary>

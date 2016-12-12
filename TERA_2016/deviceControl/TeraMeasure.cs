@@ -68,6 +68,7 @@ namespace TERA_2016.deviceControl
                     this.teraMeasure.mForm.updateCycleNumberField((cycleCount+1).ToString());
                     this.teraMeasure.tDevice.startIntegrator();
                     if (!this.teraMeasure.getMeasureResult()) { TeraMeasure.measureError("Превышено время ожидания результата"); break; }
+                    if (this.teraMeasure.measStatus > 0) break;
                     if (Properties.Settings.Default.isTestApp) Thread.Sleep(2000);
                     result = this.teraMeasure.convertAdcResult();
                     averageResult += result;
@@ -85,7 +86,6 @@ namespace TERA_2016.deviceControl
                     //this.teraMeasure.mForm.updateResultField(this.teraMeasure.absoluteResultView(result));
                     //this.pause();
                 } while (true);
-
                 this.teraMeasure.mForm.switchFieldsMeasureOnOff(true);
                 //this.teraMeasure.measTestForm.switchButtons(false);
             }
@@ -98,6 +98,8 @@ namespace TERA_2016.deviceControl
                 }
                 else Thread.Sleep(1);
             }
+
+
 
 
             bool isFinished(int cycleCount)
@@ -139,9 +141,6 @@ namespace TERA_2016.deviceControl
         {
             tDevice = d;
         }
-
-
-        
 
         public void startTest() //запуск испытаний
         {
