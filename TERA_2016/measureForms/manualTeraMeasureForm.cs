@@ -124,7 +124,7 @@ namespace TERA_2016.measureForms
                     mForm.manualMeasureForm = null;
                     if (this.teraMeas != null)
                     {
-                        if (this.teraMeas.isStart) this.teraMeas.stopTest();
+                        if (this.teraMeas.isStart) this.teraMeas.stopTest("При закрытии окна");
                     }
                     this.switchFieldsMeasureOnOff(true);
                 }
@@ -139,7 +139,7 @@ namespace TERA_2016.measureForms
         private void startMeasureBut_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(this.teraMeas.isOnMeasure().ToString());
-            if (!this.teraMeas.isOnMeasure())
+            if (!this.teraMeas.isStart)
             {
                 this.mForm.OpenTeraPort();
                 teraMeas.voltageId = voltageComboBox.SelectedIndex + 1;
@@ -165,27 +165,11 @@ namespace TERA_2016.measureForms
                 measureSettings.Default.materialHeight = Convert.ToInt32(this.materialHeight.Value);
                 measureSettings.Default.isDegreeView = isDegreeViewCheckBox.Checked;
                 measureSettings.Default.minTimeToNorm = Convert.ToInt32(minTimeToNorm.Value);
-                this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
+                this.teraMeas.startTest();
             }
             else
             {
-                int[] resultArray = new int[] { };
-                teraMeas.stopTest();
-                Thread.Sleep(300);
-                if (!this.mForm.isTestApp)
-                {
-                    this.mForm.teraPort.DiscardInBuffer();
-                    this.mForm.currentDevice.stopMeasure();
-                    do
-                    {
-                        resultArray = this.mForm.currentDevice.checkResult();
-                    } while (resultArray.Length == 0);
-                    MessageBox.Show(String.Format("Статус: {0}; Диапазон: {1}; Длительность: {2}; Начальное состояние: {3}; Конечное состояние: {4};", resultArray[0], resultArray[1], resultArray[2], resultArray[3], resultArray[4]));
-                    if (resultArray[0] == 1) switchFieldsMeasureOnOff(true);
-                }else switchFieldsMeasureOnOff(true);
-                //this.mForm.currentDevic
-
-
+                teraMeas.stopTest("Нажатием кнопки");
             }
             //else { this.mForm.currentDevice.stopMeasure();}//this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
             //this.switchFieldsMeasureOnOff(this.teraMeas.isOnMeasure());
@@ -250,15 +234,6 @@ namespace TERA_2016.measureForms
             {
                 this.measureSettingsGroup.Enabled = flag;
                 startMeasureBut.Text = flag ? "ПУСК ИЗМЕРЕНИЯ" : "ОСТАНОВИТЬ ИЗМЕРЕНИЯ";
-                if (flag)
-                {
-
-                    this.mForm.CloseTeraPort();
-
-                }else
-                {
-                    teraMeas.startTest();
-                }
             }
         }
 
