@@ -171,19 +171,9 @@ namespace TERA_2016
             this.sendCommand(newCmd);
         }
 
-        public bool stopMeasure()
+        public void stopMeasure()
         {
-            int[] r = new int[] { };
-            int i = 0;
-            Thread.Sleep(200);
             setVoltage(0);
-            do
-            {
-                i++;
-                r = this.checkResult();
-            } while (r.Length == 0 && i<10);
-            if (r.Length > 0) return r[0] == 1;
-            else return false;
             //Thread.Sleep(100);
         }
 

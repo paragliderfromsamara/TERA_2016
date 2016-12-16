@@ -80,13 +80,13 @@ namespace TERA_2016.deviceControl
                     averageResult = 0;
                     mCount = 0;
                     cycleCount++;
-                    if (!this.teraMeasure.isCyclic && cycleCount == this.teraMeasure.cycleMeasureAmount) break;
+                    if ((!this.teraMeasure.isCyclic && cycleCount == this.teraMeasure.cycleMeasureAmount) || this.teraMeasure.measStatus > 0) break;
                     
                     //счетчик циклов
                     //this.teraMeasure.mForm.updateResultField(this.teraMeasure.absoluteResultView(result));
                     //this.pause();
                 } while (true);
-                this.teraMeasure.stopTest("конец испытания");
+                this.teraMeasure.mForm.switchFieldsMeasureOnOff(true);
                 //this.teraMeasure.measTestForm.switchButtons(false);
             }
 
@@ -146,37 +146,36 @@ namespace TERA_2016.deviceControl
         {
             if (mThread == null)
             {
+                //setDiap();
                 mThread = new measureThread(this);
                 tThread = new measureTimerThread(this);
-                this.mForm.switchFieldsMeasureOnOff(false);
+                //this.measTestForm.switchButtons(true);
             }
             this.isStart = true;
         }
-        public void stopTest(string m) //остановка испытаний
+        public void stopTest() //остановка испытаний
         {
-
-            if (!Properties.Settings.Default.isTestApp && this.isStart == true)
+            if (mThread != null)
             {
-                if (mThread != null)
-                {
-                    //measTestForm.mainForm.stendPort.Close();
-                    mThread.thread.Abort();
-                    mThread = null;
-                    //this.measTestForm.switchButtons(false);
-                }
-                if (tThread != null)
-                {
-                    tThread.thread.Abort();
-                    tThread = null;
-                }
-                this.tDevice.stopMeasure();
-            }
-            
-            this.mForm.switchFieldsMeasureOnOff(true);
-            this.isStart = false;
-            MessageBox.Show(m);
-        }
+                //measTestForm.mainForm.stendPort.Close();
+                mThread.thread.Abort();
+                mThread = null;
 
+                //this.measTestForm.switchButtons(false);
+
+            }
+            if (tThread != null)
+            {
+                tThread.thread.Abort();
+                tThread = null;
+            }
+
+                this.isStart = false;
+        }
+        public bool isOnMeasure()
+        {
+            return this.mThread != null;
+        }
         private bool getMeasureResult()
         {
             this.tDevice.startIntegrator();
@@ -204,7 +203,6 @@ namespace TERA_2016.deviceControl
             return f;
         }
 
-       
         private string absoluteResultView(double r)
         {
             string[] quntMeas = new string[] { "МОм", "ГОм", "ТОм" };
